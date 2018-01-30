@@ -1,0 +1,62 @@
+// Place all the styles related to the meeting controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.select-datetime{
+margin-top: 10px;
+}
+.select_quantity{
+    margin-top: 10px;
+}
+.quantity_tag{
+    border: 1px solid #444 !important;
+    width: 50%;
+    
+}
+.location-for-user{
+    width: 50%;
+    margin-top: 10px;
+    border: 1px solid #f4f4f4 !important;
+    padding: 10px;
+}
+.one{
+    border: 1px solid;
+    padding: 9px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+.two{
+    border: 1px solid;
+    padding: 9px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+.time-border{
+    padding: 0px !important;
+}
+.one:hover{
+    background: #60bd6a
+}
+.two:hover{
+    background: #60bd6a
+}
+.highlight{
+    background: #60bd6a
+}
+#taken{
+    border: 1px solid;
+    padding: 11px;
+    background: gray;
+}
+#empty{
+    border: 1px solid;
+    padding: 11px;
+    background: white;
+}
+#selected{
+    border: 1px solid;
+    padding: 11px;
+    background: #60bd6a;
+}
+.slots-avilable{
+    padding: 10px;
+}

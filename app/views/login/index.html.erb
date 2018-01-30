@@ -1,0 +1,44 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<body class="login">    
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-1">
+        </div>
+            <div class="col-md-8 col-sm-8 col-xs-10 login-card">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 login-card-image">
+                        <center>
+                            <%= image_tag "img-01.png", class:"" %>
+                        </center>    
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 login-details">
+                        <center>
+                            <div class="row">
+                                <h4><strong>Memeber Login</strong></h4>
+                            </div>
+                            <div class="row">
+                                <%= form_tag login_path do %>
+                                    <fieldset>
+                                        <div class="row">
+                                            <%= text_field_tag :email, params[:email], placeholder:"Email", :autocompelete => :off, class:"input-fields-login"%>
+                                        </div>
+                                        <div class="row">
+                                            <%= password_field_tag :password, params[:password], placeholder: "Password", class:"input-fields-login"%>
+                                        </div>
+                                        <div class="row"> 
+                                            <%= submit_tag "Log In", class:"login-button"%>
+                                        </div>
+                                        
+                                    </fieldset>
+                                <% end %>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-2 col-sm-2 col-xs-1">
+        </div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>    

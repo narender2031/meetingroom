@@ -1,0 +1,299 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<body>    
+    <div class="row">
+        <div class="row navi-bar">
+            <div class="bar">
+                <div class="col-md-6 col-sm-6 col-xs-12 brand-logo">
+                    <%= image_tag "brand.png", class:"", style:"width: 23%;"%>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 user-name">
+                    <p class="current-user-name">Manu Anku</p>
+                </div>
+            </div>    
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-1">
+                <div class="lef-col">
+
+                </div>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-11">
+                <div class="right-col">
+                    <div class="row" style="padding:5px;">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <div class="select-datetime">
+                                    <div class="form-group">
+                                        <center>
+                                            <div class='input-group date' id='datetimepicker1' style="width: 50% !important;">
+                                                <input type='text' class="form-control" placeholder="Select date"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </center>    
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#datetimepicker1').datetimepicker();
+                                        });
+                                    </script>
+                                </div>    
+                            </div>    
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <div class="select_quantity">
+                                    <div class="dropdown">
+                                        <center>
+                                            <button class="btn btn-secondary dropdown-toggle quantity_tag" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Select Quantity...
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <li class="dropdown-item" href="">2</li>
+                                                <li class="dropdown-item" href="">4</li>
+                                                <li class="dropdown-item" href="">6</li>
+                                            </div>
+                                        </center>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="row">
+                        <div class="select-locations">
+                            <center>
+                                <div class="row">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle location-for-user" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Home location of user
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <button class="dropdown-item" type="button">Action</button>
+                                            <br>
+                                            <button class="dropdown-item" type="button">Another action</button>
+                                            <br>
+                                            <button class="dropdown-item" type="button">Something else here</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+                    </div>-->
+                    <div class="row"  style="margin-top:25px !important;">
+                        <h4><strong>Meeting room 1</strong></h4>
+                        <div class="meeting-room-booking">
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>9<p>
+                                <div class="col-sm-6 one">
+                                </div>
+                                <div class="col-sm-6  one">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>10<p>
+                                <div class="col-sm-6 one">
+                                </div>
+                                <div class="col-sm-6  one">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>11</p>
+                                <div class="col-sm-6 one">
+                                </div>
+                                <div class="col-sm-6 one">
+                            </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>12<p>
+                                <div class="col-sm-6  one">
+                                </div>
+                                <div class="col-sm-6  one">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>1<p>
+                                <div class="col-sm-6 one">
+                                </div>
+                                <div class="col-sm-6 one">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>2<p>
+                                <div class="col-sm-6 cell-padding one">
+                                </div>
+                                <div class="col-sm-6  one">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>3<p>
+                                <div class="col-sm-6  one">
+                                </div>
+                                <div class="col-sm-6 one">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>4<p>
+                                <div class="col-sm-6 one">
+                                </div>
+                                <div class="col-sm-6  one">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>5<p>
+                                <div class="col-sm-6  one">
+                                </div>
+                                <div class="col-sm-6 one">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>6<p>
+                                <div class="col-sm-6 one">
+                                </div>
+                                <div class="col-sm-6  one">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>7<p>
+                                <div class="col-sm-6  one">
+                                </div>
+                                <div class="col-sm-6 one">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>8<p>
+                                <div class="col-sm-6  one">
+                                </div>
+                                <div class="col-sm-6 one">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"  style="margin-top:25px !important;">
+                        <h4><strong>Meeting room 2</strong></h4>
+                        <div class="meeting-room-booking">
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>9<p>
+                                <div class="col-sm-6 two">
+                                </div>
+                                <div class="col-sm-6  two">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>10<p>
+                                <div class="col-sm-6  two">
+                                </div>
+                                <div class="col-sm-6  two">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>11</p>
+                                <div class="col-sm-6 two">
+                                </div>
+                                <div class="col-sm-6 two">
+                            </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>12<p>
+                                <div class="col-sm-6 two">
+                                </div>
+                                <div class="col-sm-6 two">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>1<p>
+                                <div class="col-sm-6 two">
+                                </div>
+                                <div class="col-sm-6  two">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>2<p>
+                                <div class="col-sm-6 two">
+                                </div>
+                                <div class="col-sm-6  two">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>3<p>
+                                <div class="col-sm-6 two">
+                                </div>
+                                <div class="col-sm-6  two">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>4<p>
+                                <div class="col-sm-6 two">
+                                </div>
+                                <div class="col-sm-6  two">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border ">
+                                <p>5<p>
+                                <div class="col-sm-6  two">
+                                </div>
+                                <div class="col-sm-6  two">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>6<p>
+                                <div class="col-sm-6 two">
+                                </div>
+                                <div class="col-sm-6  two">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>7<p>
+                                <div class="col-sm-6 two">
+                                </div>
+                                <div class="col-sm-6  two">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-1 time-border">
+                                <p>8<p>
+                                <div class="col-sm-6  two">
+                                </div>
+                                <div class="col-sm-6  two">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:20px;">
+                        <div class="col-md-4 col-sm-3 col-xs-4">
+                            <div class="col-sm-1" id="taken">
+                            </div><span class="slots-avilable">Taken</span>
+                        </div>
+                        <div class="col-md-4 col-sm-3 col-xs-4">
+                            <div class="col-sm-1" id="empty">
+                            </div><span class="slots-avilable">Available</span>
+                        </div>
+                        <div class="col-md-4 col-sm-3 col-xs-4">
+                            <div class="col-sm-1" id="selected">
+                            </div><span class="slots-avilable">Selected</span>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function(){
+        $('.dropdown-toggle').dropdown();
+    });
+    </script>
+    <script>
+    $( ".one" ).click(function() {
+      $( this ).toggleClass( "highlight" );
+      console.log(this.className)
+    });
+    </script>
+    <script>
+    $( ".two" ).click(function() {
+      $( this ).toggleClass( "highlight" );
+      console.log(this.className)
+    });
+    </script>
+</body>    
