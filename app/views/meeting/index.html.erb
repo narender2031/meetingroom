@@ -26,18 +26,17 @@
                             <div class="row">
                                 <div class="select-datetime">
                                     <div class="form-group">
-                                        <center>
-                                            <div class='input-group date' id='datetimepicker1' style="width: 50% !important;">
-                                                <input type='text' class="form-control" placeholder="Select date"/>
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </center>    
+                                        <div class='input-group date' id='datetimepicker1' style="width: 50% !important;">
+                                            <input type='text' class="form-control" placeholder="Select date"/>
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>   
                                     </div>
                                     <script type="text/javascript">
                                         $(function () {
-                                            $('#datetimepicker1').datetimepicker();
+                                          var date =   $('#datetimepicker1').datetimepicker();
+                                          console.log(date);
                                         });
                                     </script>
                                 </div>    
@@ -47,16 +46,14 @@
                             <div class="row">
                                 <div class="select_quantity">
                                     <div class="dropdown">
-                                        <center>
-                                            <button class="btn btn-secondary dropdown-toggle quantity_tag" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-secondary dropdown-toggle quantity_tag" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Select Quantity...
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li class="dropdown-item" href="">2</li>
-                                                <li class="dropdown-item" href="">4</li>
-                                                <li class="dropdown-item" href="">6</li>
-                                            </div>
-                                        </center>    
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li class="dropdown-item" href="">2</li>
+                                            <li class="dropdown-item" href="">4</li>
+                                            <li class="dropdown-item" href="">6</li>
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
@@ -87,86 +84,86 @@
                         <div class="meeting-room-booking">
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>9<p>
-                                <div class="col-sm-6 one">
+                                <div class="col-sm-6 one nine" id="9">
                                 </div>
-                                <div class="col-sm-6  one">
+                                <div class="col-sm-6  one nine_half" id="9.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>10<p>
-                                <div class="col-sm-6 one">
+                                <div class="col-sm-6 one ten" id="10">
                                 </div>
-                                <div class="col-sm-6  one">
+                                <div class="col-sm-6  one ten_half" id="10.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>11</p>
-                                <div class="col-sm-6 one">
+                                <div class="col-sm-6 one elevan" id="11">
                                 </div>
-                                <div class="col-sm-6 one">
-                            </div>
+                                <div class="col-sm-6 one elevan_half" id="11.30">
+                                </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>12<p>
-                                <div class="col-sm-6  one">
+                                <div class="col-sm-6  one twalve" id="12">
                                 </div>
-                                <div class="col-sm-6  one">
+                                <div class="col-sm-6  one twalve_half" id="12.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>1<p>
-                                <div class="col-sm-6 one">
+                                <div class="col-sm-6 one new_one" id="1">
                                 </div>
-                                <div class="col-sm-6 one">
+                                <div class="col-sm-6 one one_half" id="1.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>2<p>
-                                <div class="col-sm-6 cell-padding one">
+                                <div class="col-sm-6  one two" id="2">
                                 </div>
-                                <div class="col-sm-6  one">
+                                <div class="col-sm-6  one two_half" id="2.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>3<p>
-                                <div class="col-sm-6  one">
+                                <div class="col-sm-6  one three" id="3">
                                 </div>
-                                <div class="col-sm-6 one">
+                                <div class="col-sm-6 one three_half" id="3:30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>4<p>
-                                <div class="col-sm-6 one">
+                                <div class="col-sm-6 one four" id="4">
                                 </div>
-                                <div class="col-sm-6  one">
+                                <div class="col-sm-6  one four_half" id="4.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>5<p>
-                                <div class="col-sm-6  one">
+                                <div class="col-sm-6  one five" id="5">
                                 </div>
-                                <div class="col-sm-6 one">
+                                <div class="col-sm-6 one five_half" id="5.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>6<p>
-                                <div class="col-sm-6 one">
+                                <div class="col-sm-6 one six" id="6">
                                 </div>
-                                <div class="col-sm-6  one">
+                                <div class="col-sm-6  one six_half" id="6.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>7<p>
-                                <div class="col-sm-6  one">
+                                <div class="col-sm-6  one seven" id="7">
                                 </div>
-                                <div class="col-sm-6 one">
+                                <div class="col-sm-6 one seven_half" id="7.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>8<p>
-                                <div class="col-sm-6  one">
+                                <div class="col-sm-6  one eight" id="8">
                                 </div>
-                                <div class="col-sm-6 one">
+                                <div class="col-sm-6 one eight_half" id="8.30">
                                 </div>
                             </div>
                         </div>
@@ -176,86 +173,86 @@
                         <div class="meeting-room-booking">
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>9<p>
-                                <div class="col-sm-6 two">
+                                <div class="col-sm-6 one nine" id="9">
                                 </div>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6  one nine_half" id="9.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>10<p>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6 one ten" id="10">
                                 </div>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6  one ten_half" id="10.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>11</p>
-                                <div class="col-sm-6 two">
+                                <div class="col-sm-6 one elevan" id="11">
                                 </div>
-                                <div class="col-sm-6 two">
-                            </div>
+                                <div class="col-sm-6 one elevan_half" id="11.30">
+                                </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>12<p>
-                                <div class="col-sm-6 two">
+                                <div class="col-sm-6  one twalve" id="12">
                                 </div>
-                                <div class="col-sm-6 two">
+                                <div class="col-sm-6  one twalve_half" id="12.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>1<p>
-                                <div class="col-sm-6 two">
+                                <div class="col-sm-6 one new_one" id="1">
                                 </div>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6 one one_half" id="1.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>2<p>
-                                <div class="col-sm-6 two">
+                                <div class="col-sm-6  one two" id="2">
                                 </div>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6  one two_half" id="2.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>3<p>
-                                <div class="col-sm-6 two">
+                                <div class="col-sm-6  one three" id="3">
                                 </div>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6 one three_half" id="3:30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>4<p>
-                                <div class="col-sm-6 two">
+                                <div class="col-sm-6 one four" id="4">
                                 </div>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6  one four_half" id="4.30">
                                 </div>
                             </div>
-                            <div class="col-sm-1 col-xs-1 time-border ">
+                            <div class="col-sm-1 col-xs-1 time-border">
                                 <p>5<p>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6  one five" id="5">
                                 </div>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6 one five_half" id="5.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>6<p>
-                                <div class="col-sm-6 two">
+                                <div class="col-sm-6 one six" id="6">
                                 </div>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6  one six_half" id="6.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>7<p>
-                                <div class="col-sm-6 two">
+                                <div class="col-sm-6  one seven" id="7">
                                 </div>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6 one seven_half" id="7.30">
                                 </div>
                             </div>
                             <div class="col-sm-1 col-xs-1 time-border">
                                 <p>8<p>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6  one eight" id="8">
                                 </div>
-                                <div class="col-sm-6  two">
+                                <div class="col-sm-6 one eight_half" id="8.30">
                                 </div>
                             </div>
                         </div>
@@ -274,6 +271,41 @@
                             </div><span class="slots-avilable">Selected</span>
                         </div>
                     </div>
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 5px;">
+                            <div class="row">
+                                <div class="start_at">
+                                    <p> <strong>Start at</strong></p>
+                                    <p class="start_at_time">Start at time</p>
+                                    <input type="hidden" id="time_meeting" value="" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 5px;">
+                            <div class="row">
+                                <div class="duration">
+                                    <p><strong>Duration</strong></p>
+                                    <select name="cars" class="duration_meeting" id="something_selcted"style="height: 34px;display:none">
+                                    <option value="30" id="thirty_minute">30 Minute</option>
+                                    <option value="1" id="sixty_minute">1 Houe</option>
+                                    <option value="1.30" id="ninty_minute">1:30 Hour</option>
+                                    <option value="2" id="onetwenty_minute">2 Hour</option>
+                                    <option value="2.30 " id="onefifty_minute">2:30 Hour</option>
+                                    <option value="3" id="oneeighty_minute">3 Hour</option>
+                                    <option value="3.30" id="twoten_minute">3:30 Hour</option>
+                                    <option value="4" id="twofourty_minute">4 Hour</option>
+                                    <option value="4.30" id="twoseventy_minute">4:30 Hour</option>
+                                    <option value="5" id="threehund_minute">5 Hour</option>
+                                    <option value="5.30" id="threethirty_minute">5:30 Hour</option>
+                                    <option value="6" id="threesixty_minute">6 Hour</option>
+                                </select>
+                                <select name="cars" class="duration_meeting" id="no_selected" style="height: 34px; display:block">
+                                    <option disabled="" selected="selected" value="" class="">Duration</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>    
             </div>
         </div>
@@ -286,14 +318,542 @@
     </script>
     <script>
     $( ".one" ).click(function() {
+        $(".one").removeClass("highlight");
       $( this ).toggleClass( "highlight" );
-      console.log(this.className)
-    });
+      var el =  $(this).attr('id')
+        $('#time_meeting').val(el);
+        $('.start_at_time').text(el);
+        $('.start_at_time').css("color","#444")
+        $('#no_selected').css("display","none");
+        $('#something_selcted').css("display","block");
+        $("#something_selcted").val(30);
+      console.log(el);
+    });     
     </script>
     <script>
-    $( ".two" ).click(function() {
-      $( this ).toggleClass( "highlight" );
-      console.log(this.className)
-    });
+        var d = new Date();
+        time = d.getHours();
+        minute = d.getMinutes();
+        console.log(time+"."+minute)
+        var time_min = parseInt(time+"."+minute)
+        if(time_min > 9){
+            $('.nine').css('pointerEvents','none')
+            $('.nine').css("background","gray");
+        }
+        if(time_min > 9.30){
+            $('.nine_half').css('pointerEvents','none')
+            $('.nine_half').css("background","gray");
+        }
+        if(time_min > 10){
+            $('.ten').css('pointerEvents','none')
+            $('.ten').css("background","gray");
+        }
+        if(time_min > 10.30){
+            $('.ten_half').css('pointerEvents','none')
+            $('.ten_half').css("background","gray");
+        }
+        if(time_min > 11){
+            $('.elevan').css('pointerEvents','none')
+            $('.elevan').css("background","gray");
+        }
+        if(time_min > 11.30){
+            $('.elevan_half').css('pointerEvents','none')
+            $('.elevan_half').css("background","gray");
+        }
+        if(time_min > 12){
+            $('.twalve').css('pointerEvents','none')
+            $('.twalve').css("background","gray");
+        }
+        if(time_min > 12.30){
+            $('.twalve_half').css('pointerEvents','none')
+            $('.twalve_half').css("background","gray");
+        }
+        if(time_min > 13){
+            $('.new_one').css('pointerEvents','none')
+            $('.new_one').css("background","gray");
+        }
+        if(time_min > 13.30){
+            $('.one_half').css('pointerEvents','none')
+            $('.one_half').css("background","gray");
+        }
+        if(time_min > 14){
+            $('.two').css('pointerEvents','none')
+            $('.two').css("background","gray");
+        }
+        if(time_min > 14.30){
+            $('.two_half').css('pointerEvents','none')
+            $('.two_half').css("background","gray");
+        }
+        if(time_min > 14){
+            $('.two').css('pointerEvents','none')
+            $('.two').css("background","gray");
+        }
+        if(time_min > 14.30){
+            $('.two_half').css('pointerEvents','none')
+            $('.two_half').css("background","gray");
+        }
+        if(time_min > 15){
+            $('.three').css('pointerEvents','none')
+            $('.three').css("background","gray");
+        }
+        if(time_min > 15.30){
+            $('.three_half').css('pointerEvents','none')
+            $('.three_half').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+        }
+        if(time_min > 16){
+            $('.four').css('pointerEvents','none')
+            $('.four').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+        }
+        if(time_min > 16.30){
+            $('.four_half').css('pointerEvents','none')
+            $('.four_half').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+        }
+        if(time_min > 17){
+            $('.five').css('pointerEvents','none')
+            $('.five').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+        }
+        if(time_min > 17.30){
+            $('.five_half').css('pointerEvents','none')
+            $('.five_half').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+        }
+        if(time_min > 18){
+            $('.six').css('pointerEvents','none')
+            $('.six').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            
+        }
+        if(time_min > 18.30){
+            $('.six_half').css('pointerEvents','none')
+            $('.six_half').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+        }
+        if(time_min >= 19){
+            $('.seven').css('pointerEvents','none')
+            $('.seven').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+        }
+        if(time_min >= 19.30){
+            $('.seven_half').css('pointerEvents','none')
+            $('.seven_half').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+            $('#something_selcted #ninty_minute').css("display","none");  
+        }
+        if(time_min >= 20){
+            $('.seven_half').css('pointerEvents','none')
+            $('.seven_half').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #ninty_minute').css("display","none"); 
+        }
+        if(time_min >= 20.30){
+            $('.seven_half').css('pointerEvents','none')
+            $('.seven_half').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #sixty_minute').css("display","none");  
+        }
+        console.log(time);
     </script>
+    <script>
+    $('#something_selcted').on('change', function(e) {
+        var timePeriodMeeting =  this.value;
+            console.log(timePeriodMeeting)
+       var time_slot =  $('#time_meeting').val();
+        if(time_slot == 9 || time_slot == 10 || time_slot == 11 || time_slot == 12 || time_slot == 1 || time_slot == 2 || time_slot == 3 || time_slot == 4 || time_slot == 5 || time_slot == 6 || time_slot == 7 || time_slot == 8){
+            if(timePeriodMeeting == 1){
+                $('.highlight').next().addClass("highlight")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().removeClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().removeClass('highlight')
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().removeClass('highlight')
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }
+            else if (timePeriodMeeting == 1.30){
+                $('.highlight').next().addClass("highlight")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().removeClass('highlight')
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().removeClass('highlight')
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }
+            else if(timePeriodMeeting == 2){
+                $('.highlight').next().addClass("highlight")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().removeClass('highlight')
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().removeClass('highlight')
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }
+            else if(timePeriodMeeting == 2.30){
+                $('.highlight').next().addClass("highlight")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().removeClass('highlight')
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }
+            else if(timePeriodMeeting == 3){
+                $('.highlight').next().addClass("highlight")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().removeClass('highlight')
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }
+            else if(timePeriodMeeting == 3.30){
+                $('.highlight').next().addClass("highlight")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }
+            else if(timePeriodMeeting == 4){
+                $('.highlight').next().addClass("highlight")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }
+            else if(timePeriodMeeting == 4.30){
+                $('.highlight').next().addClass("highlight")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().addClass('highlight');
+
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }
+            else if(timePeriodMeeting == 5){
+                $('.highlight').next().addClass("highlight")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().addClass('highlight');
+
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+                
+
+            }
+            else if(timePeriodMeeting == 5.30){
+                $('.highlight').next().addClass("highlight")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+            }
+            else if(timePeriodMeeting == 6){
+                $('.highlight').next().addClass("highlight");
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().addClass('highlight');
+            }
+            else if(timePeriodMeeting == 30){
+                $('.highlight').parent('.time-border').next().children().next().next().removeClass("highlight");
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().removeClass('highlight')
+                $('.highlight').next().removeClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().removeClass('highlight');
+            }
+        }
+        else if(time_slot == 9.30 || time_slot == 10.30 || time_slot == 11.30 || time_slot == 12.30 || time_slot == 1.30 || time_slot == 2.30 || time_slot == 3.30 || time_slot == 4.30 || time_slot == 5.30 || time_slot == 6.30 || time_slot == 7.30 || time_slot == 8.30){
+                console.log("hello")
+            if(timePeriodMeeting == 1){
+                console.log("gello")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }else if(timePeriodMeeting == 1.30){
+                console.log("hello ammmm")
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            } else if(timePeriodMeeting == 2){
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            } else if(timePeriodMeeting == 2){
+            }else if(timePeriodMeeting == 2.30){
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            } else if(timePeriodMeeting == 3){
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }else if(timePeriodMeeting == 3.30){
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }else if(timePeriodMeeting == 4){
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }else if(timePeriodMeeting == 4.30){
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }else if(timePeriodMeeting == 5){
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().removeClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }else if(timePeriodMeeting == 5.30){
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.one').first().removeClass('highlight');
+            }else if(timePeriodMeeting == 6){
+                $('.highlight').parent('.time-border').next().children().next('.one').first().addClass('highlight')
+                $('.highlight').parent('.time-border').next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.one').first().next().addClass('highlight');
+                $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.one').first().addClass('highlight');
+            } else if(timePeriodMeeting == 30){
+                $('.highlight').parent('.time-border').next().children().next().next().removeClass("highlight");
+                $('.highlight').parent('.time-border').next().next().children().next('.one').first().removeClass('highlight')
+            }
+            
+        }    
+    
+       // if(timePeriodMeeting == '30'){
+         //   $('.highlight').find('.highlight').removeClass("highlight");
+       // }
+        //if(timePeriodMeeting == 1){
+        //    $('.highlight').parent().parent().next('.one').addClass('highlight')   
+      //     console.log( $('.highlight').parent('.time-border').next().children().next('#10').addClass('highlight'));
+      //  }
+        
+       
+    })
+    </script>
+   
 </body>    
