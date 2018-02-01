@@ -16,4 +16,12 @@ class LoginController < ApplicationController
         end
        
     end
+    def logout
+        @user = current_user
+        @user.meeting = nil
+        @user.save
+        session[:user_id] = nil
+        cookies[:token] = nil
+        render :index
+    end
 end
