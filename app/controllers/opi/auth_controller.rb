@@ -9,6 +9,7 @@ class Opi::AuthController < Opi::OpiController
         if @time.blank?
         else
             @user = current_user
+            puts @time.to_date
             @user.meeting = @time.to_date
             @user.save
         end

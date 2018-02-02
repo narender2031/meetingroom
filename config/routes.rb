@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   post '/login', to: "login#create"
   get '/logout', to: "login#logout"
   get '/meeting', to: "meeting#index"
+  post '/bookings', to: "meeting#create"
 end

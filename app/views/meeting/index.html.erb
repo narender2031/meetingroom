@@ -32,322 +32,245 @@
                             </div>
                         </div>    
                     </div>
-                    <div class="row" style="padding:5px;">
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="margin-left:-18px;">
-                            <div class="row">
-                                <div class="select-datetime">
-                                    <div class="form-group">
-                                        <div class='input-group date' id='datetimepicker1' >
-                                            <input type='hidden' class="form-control"  id="current_date" placeholder="Select date" onchange="myFunction()"/>
-                                        </div>   
-                                    </div>
-                                    <script type="text/javascript">
-                                        $(function () {
-                                            var today = new Date();
-                                            date = today.getDate() + parseInt(7)
-                                            var date = new Date();
-                                            date.setDate(date.getDate() + 7);
-                                            
-                                            var dateMsg = date.getDate()+'/'+ (date.getMonth()+1) +'/'+date.getFullYear();
-                                            
-                                            $('#datetimepicker1').datetimepicker({
-                                                inline: true,
-                                                defaultDate: "<%= @time_req%>",
-                                                maxDate: date,
-                                            }).on('dp.change',function(e){
-                                                console.log(e.date._d)
-                                                var form = new FormData();
-                                                form.append("value", e.date._d);
+                    <%= form_for @bookings do |f| %>
+                        <div class="row" style="padding:5px;">
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-left:-18px;">
+                                <div class="row">
+                                    <div class="select-datetime">
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker1' >
+                                                <input type='hidden' class="form-control"  id="current_date" placeholder="Select date" onchange="myFunction()"/>
+                                                <%= f.hidden_field :booking_date, id:"date_of_booking", value:""%>
+                                            </div>   
+                                        </div>
+                                        <script type="text/javascript">
+                                            $(function () {
+                                                var today = new Date();
+                                                date = today.getDate() + parseInt(7)
+                                                var date = new Date();
+                                                date.setDate(date.getDate() + 7);
                                                 
-                                                var settings = {
-                                                  "async": true,
-                                                  "crossDomain": true,
-                                                  "url": "http://localhost:3000/opi/auth",
-                                                  "method": "POST",
-                                                  "headers": {
-                                                    "authorization": "Token ec03b652808b4e8ec40ca14b8db3618d",
-                                                    "cache-control": "no-cache",
-                                                    "postman-token": "0ce0baec-3fba-28e5-ef7f-02c165ddef3e"
-                                                  },
-                                                  "processData": false,
-                                                  "contentType": false,
-                                                  "mimeType": "multipart/form-data",
-                                                  "data": form
-                                                }
+                                                var dateMsg = date.getDate()+'/'+ (date.getMonth()+1) +'/'+date.getFullYear();
                                                 
-                                                $.ajax(settings).done(function (response) {
-                                                  console.log(response);
-                                                  window.location.reload();
-                                                });
-                                            })
-                                            ;
-                                            console.log($('#current_date').val())  
-                                            
-                                        });
-                                    </script>
+                                                $('#datetimepicker1').datetimepicker({
+                                                    inline: true,
+                                                    defaultDate: "<%= @time_req%>",
+                                                    maxDate: date,
+                                                }).on('dp.change',function(e){
+                                                    console.log(e.date._d)
+                                                    $('#date_of_booking').val(e.date._d);
+                                                    var form = new FormData();
+                                                    form.append("value", e.date._d);
+                                                    
+                                                    var settings = {
+                                                    "async": true,
+                                                    "crossDomain": true,
+                                                    "url": "http://localhost:3000/opi/auth",
+                                                    "method": "POST",
+                                                    "headers": {
+                                                        "authorization": "Token <%= @user.token%>",
+                                                        "cache-control": "no-cache",
+                                                        "postman-token": "0ce0baec-3fba-28e5-ef7f-02c165ddef3e"
+                                                    },
+                                                    "processData": false,
+                                                    "contentType": false,
+                                                    "mimeType": "multipart/form-data",
+                                                    "data": form
+                                                    }
+                                                    
+                                                    $.ajax(settings).done(function (response) {
+                                                    console.log(response);
+                                                    window.location.reload();
+                                                    });
+                                                })
+                                                ;
+                                                console.log($('#current_date').val())  
+                                                
+                                                
+                                            });
+                                        </script>
+                                    </div>    
                                 </div>    
-                            </div>    
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="margin-left:-18px;">
-                            <div class="row">
-                                <div class="select_quantity">
-                                    <select class="select_seats_meeting">
-                                        <option value="2">2 Seats</option>
-                                        <option value="4">4 seats</option>
-                                        <option value="6">6 seats</option>
-                                        <option value="8">8 seats</option>
-                                    </select>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-left:-18px;">
+                                <div class="row">
+                                    <div class="select_quantity">
+                                        <%= f.select :seats,[ 2,4,6,8 ], {prompt: 'Select Seats'}, class:"select_seats_meeting" %>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!--<div class="row">
-                        <div class="select-locations">
-                            <center>
-                                <div class="row">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle location-for-user" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Home location of user
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <button class="dropdown-item" type="button">Action</button>
-                                            <br>
-                                            <button class="dropdown-item" type="button">Another action</button>
-                                            <br>
-                                            <button class="dropdown-item" type="button">Something else here</button>
+                        <!--<div class="row">
+                            <div class="select-locations">
+                                <center>
+                                    <div class="row">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle location-for-user" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Home location of user
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <button class="dropdown-item" type="button">Action</button>
+                                                <br>
+                                                <button class="dropdown-item" type="button">Another action</button>
+                                                <br>
+                                                <button class="dropdown-item" type="button">Something else here</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </center>
-                        </div>
-                    </div>-->
-                    <div class="row"  style="margin-top:25px !important;">
-                        <h4><strong>Meeting room 1</strong></h4>
-                        <div class="meeting-room-booking">
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>9<p>
-                                <div class="col-sm-6 one nine" id="9">
-                                </div>
-                                <div class="col-sm-6  one nine_half" id="9.30">
-                                </div>
+                                </center>
                             </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>10<p>
-                                <div class="col-sm-6 one ten" id="10">
+                        </div>-->
+                        <div class="row"  style="margin-top:25px !important;">
+                            <h4><strong>Meeting room 1</strong></h4>
+                            <div class="meeting-room-booking">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>9<p>
+                                    <div class="col-sm-6 one nine" id="9">
+                                    </div>
+                                    <div class="col-sm-6  one nine_half" id="9.30">
+                                    </div>
                                 </div>
-                                <div class="col-sm-6  one ten_half" id="10.30">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>10<p>
+                                    <div class="col-sm-6 one ten" id="10">
+                                    </div>
+                                    <div class="col-sm-6  one ten_half" id="10.30">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>11</p>
-                                <div class="col-sm-6 one elevan" id="11">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>11</p>
+                                    <div class="col-sm-6 one elevan" id="11">
+                                    </div>
+                                    <div class="col-sm-6 one elevan_half" id="11.30">
+                                    </div>
                                 </div>
-                                <div class="col-sm-6 one elevan_half" id="11.30">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>12<p>
+                                    <div class="col-sm-6  one twalve" id="12">
+                                    </div>
+                                    <div class="col-sm-6  one twalve_half" id="12.30">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>12<p>
-                                <div class="col-sm-6  one twalve" id="12">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>1<p>
+                                    <div class="col-sm-6 one new_one" id="1">
+                                    </div>
+                                    <div class="col-sm-6 one one_half" id="1.30">
+                                    </div>
                                 </div>
-                                <div class="col-sm-6  one twalve_half" id="12.30">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>2<p>
+                                    <div class="col-sm-6  one two" id="2">
+                                    </div>
+                                    <div class="col-sm-6  one two_half" id="2.30">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>1<p>
-                                <div class="col-sm-6 one new_one" id="1">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>3<p>
+                                    <div class="col-sm-6  one three" id="3">
+                                    </div>
+                                    <div class="col-sm-6 one three_half" id="3.30">
+                                    </div>
                                 </div>
-                                <div class="col-sm-6 one one_half" id="1.30">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>4<p>
+                                    <div class="col-sm-6 one four" id="4">
+                                    </div>
+                                    <div class="col-sm-6  one four_half" id="4.30">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>2<p>
-                                <div class="col-sm-6  one two" id="2">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>5<p>
+                                    <div class="col-sm-6  one five" id="5">
+                                    </div>
+                                    <div class="col-sm-6 one five_half" id="5.30">
+                                    </div>
                                 </div>
-                                <div class="col-sm-6  one two_half" id="2.30">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>6<p>
+                                    <div class="col-sm-6 one six" id="6">
+                                    </div>
+                                    <div class="col-sm-6  one six_half" id="6.30">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>3<p>
-                                <div class="col-sm-6  one three" id="3">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>7<p>
+                                    <div class="col-sm-6  one seven" id="7">
+                                    </div>
+                                    <div class="col-sm-6 one seven_half" id="7.30">
+                                    </div>
                                 </div>
-                                <div class="col-sm-6 one three_half" id="3.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>4<p>
-                                <div class="col-sm-6 one four" id="4">
-                                </div>
-                                <div class="col-sm-6  one four_half" id="4.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>5<p>
-                                <div class="col-sm-6  one five" id="5">
-                                </div>
-                                <div class="col-sm-6 one five_half" id="5.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>6<p>
-                                <div class="col-sm-6 one six" id="6">
-                                </div>
-                                <div class="col-sm-6  one six_half" id="6.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>7<p>
-                                <div class="col-sm-6  one seven" id="7">
-                                </div>
-                                <div class="col-sm-6 one seven_half" id="7.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>8<p>
-                                <div class="col-sm-6  one eight" id="8">
-                                </div>
-                                <div class="col-sm-6 one eight_half" id="8.30">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row"  style="margin-top:25px !important;">
-                        <h4><strong>Meeting room 2</strong></h4>
-                        <div class="meeting-room-booking">
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>9<p>
-                                <div class="col-sm-6 one nine" id="9">
-                                </div>
-                                <div class="col-sm-6  one nine_half" id="9.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>10<p>
-                                <div class="col-sm-6 one ten" id="10">
-                                </div>
-                                <div class="col-sm-6  one ten_half" id="10.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>11</p>
-                                <div class="col-sm-6 one elevan" id="11">
-                                </div>
-                                <div class="col-sm-6 one elevan_half" id="11.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>12<p>
-                                <div class="col-sm-6  one twalve" id="12">
-                                </div>
-                                <div class="col-sm-6  one twalve_half" id="12.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>1<p>
-                                <div class="col-sm-6 one new_one" id="1">
-                                </div>
-                                <div class="col-sm-6 one one_half" id="1.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>2<p>
-                                <div class="col-sm-6  one two" id="2">
-                                </div>
-                                <div class="col-sm-6  one two_half" id="2.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>3<p>
-                                <div class="col-sm-6  one three" id="3">
-                                </div>
-                                <div class="col-sm-6 one three_half" id="3.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>4<p>
-                                <div class="col-sm-6 one four" id="4">
-                                </div>
-                                <div class="col-sm-6  one four_half" id="4.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>5<p>
-                                <div class="col-sm-6  one five" id="5">
-                                </div>
-                                <div class="col-sm-6 one five_half" id="5.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>6<p>
-                                <div class="col-sm-6 one six" id="6">
-                                </div>
-                                <div class="col-sm-6  one six_half" id="6.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>7<p>
-                                <div class="col-sm-6  one seven" id="7">
-                                </div>
-                                <div class="col-sm-6 one seven_half" id="7.30">
-                                </div>
-                            </div>
-                            <div class="col-sm-1 col-xs-1 time-border">
-                                <p>8<p>
-                                <div class="col-sm-6  one eight" id="8">
-                                </div>
-                                <div class="col-sm-6 one eight_half" id="8.30">
+                                <div class="col-sm-1 col-xs-1 time-border">
+                                    <p>8<p>
+                                    <div class="col-sm-6  one eight" id="8">
+                                    </div>
+                                    <div class="col-sm-6 one eight_half" id="8.30">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" style="margin-top:20px;">
-                        <div class="col-md-4 col-sm-3 col-xs-4">
-                            <div class="col-sm-1" id="taken">
-                            </div><span class="slots-avilable">Taken</span>
+                        
+                        <div class="row" style="margin-top:20px;">
+                            <div class="col-md-4 col-sm-3 col-xs-4">
+                                <div class="col-sm-1" id="taken">
+                                </div><span class="slots-avilable">Taken</span>
+                            </div>
+                            <div class="col-md-4 col-sm-3 col-xs-4">
+                                <div class="col-sm-1" id="empty">
+                                </div><span class="slots-avilable">Available</span>
+                            </div>
+                            <div class="col-md-4 col-sm-3 col-xs-4">
+                                <div class="col-sm-1" id="selected">
+                                </div><span class="slots-avilable">Selected</span>
+                            </div>
                         </div>
-                        <div class="col-md-4 col-sm-3 col-xs-4">
-                            <div class="col-sm-1" id="empty">
-                            </div><span class="slots-avilable">Available</span>
-                        </div>
-                        <div class="col-md-4 col-sm-3 col-xs-4">
-                            <div class="col-sm-1" id="selected">
-                            </div><span class="slots-avilable">Selected</span>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top:10px;">
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 5px;">
-                            <div class="row">
-                                <div class="start_at">
-                                    <p> <strong>Start at</strong></p>
-                                    <p class="start_at_time">Start at time</p>
-                                    <input type="hidden" id="time_meeting" value="" >
+                        <div class="row" style="margin-top:10px;">
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 5px;">
+                                <div class="row">
+                                    <div class="start_at">
+                                        <p> <strong>Start at</strong></p>
+                                        <p class="start_at_time">Start at time</p>
+                                        <%= f.hidden_field :booking_start_time, value:"", id:"time_meeting"%>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 5px;">
+                                <div class="row">
+                                    <div class="duration">
+                                        <p><strong>Duration</strong></p>
+                                        <select name="cars" class="duration_meeting" id="something_selcted"style="height: 34px;display:none">
+                                        <option value="30" id="thirty_minute">30 Minute</option>
+                                        <option value="1" id="sixty_minute">1 Houe</option>
+                                        <option value="1.30" id="ninty_minute">1:30 Hour</option>
+                                        <option value="2" id="onetwenty_minute">2 Hour</option>
+                                        <option value="2.30 " id="onefifty_minute">2:30 Hour</option>
+                                        <option value="3" id="oneeighty_minute">3 Hour</option>
+                                        <option value="3.30" id="twoten_minute">3:30 Hour</option>
+                                        <option value="4" id="twofourty_minute">4 Hour</option>
+                                        <option value="4.30" id="twoseventy_minute">4:30 Hour</option>
+                                        <option value="5" id="threehund_minute">5 Hour</option>
+                                        <option value="5.30" id="threethirty_minute">5:30 Hour</option>
+                                        <option value="6" id="threesixty_minute">6 Hour</option>
+                                    </select>
+                                    <%= f.hidden_field :duration, id: "duration", value:"" %>
+                                    <%= f.hidden_field :user_id,  value: @user.id %>
+                                    <select name="cars" class="duration_meeting" id="no_selected" style="height: 34px; display:block">
+                                        <option disabled="" selected="selected" value="" class="">Duration</option>
+                                    </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 5px;">
-                            <div class="row">
-                                <div class="duration">
-                                    <p><strong>Duration</strong></p>
-                                    <select name="cars" class="duration_meeting" id="something_selcted"style="height: 34px;display:none">
-                                    <option value="30" id="thirty_minute">30 Minute</option>
-                                    <option value="1" id="sixty_minute">1 Houe</option>
-                                    <option value="1.30" id="ninty_minute">1:30 Hour</option>
-                                    <option value="2" id="onetwenty_minute">2 Hour</option>
-                                    <option value="2.30 " id="onefifty_minute">2:30 Hour</option>
-                                    <option value="3" id="oneeighty_minute">3 Hour</option>
-                                    <option value="3.30" id="twoten_minute">3:30 Hour</option>
-                                    <option value="4" id="twofourty_minute">4 Hour</option>
-                                    <option value="4.30" id="twoseventy_minute">4:30 Hour</option>
-                                    <option value="5" id="threehund_minute">5 Hour</option>
-                                    <option value="5.30" id="threethirty_minute">5:30 Hour</option>
-                                    <option value="6" id="threesixty_minute">6 Hour</option>
-                                </select>
-                                <select name="cars" class="duration_meeting" id="no_selected" style="height: 34px; display:block">
-                                    <option disabled="" selected="selected" value="" class="">Duration</option>
-                                </select>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4">
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <%= f.submit "Booking" %>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
                             </div>
                         </div>
-                    </div>
+                    <% end %>
                 </div>    
             </div>
         </div>
@@ -382,7 +305,6 @@
         var today_time = d.getDate();
         console.log("manu "+today_time);
         <% @tiwe = Time.now %>
-        <% puts @tiwe.to_date%>
         <% if @tiwe.to_date == @user.meeting.to_date %>
             if (time_min > 9){
                 $('.nine').css('pointerEvents','none')
@@ -540,6 +462,8 @@
             if(time_min > 20){
                 $('.seven_half').css('pointerEvents','none')
                 $('.seven_half').css("background","gray");
+                $('.eight').css('pointerEvents','none')
+                $('.eight').css("background","gray");
                 $('#something_selcted #threethirty_minute').css("display","none");
                 $('#something_selcted #threesixty_minute').css("display","none");
                 $('#something_selcted #threehund_minute').css("display","none");
@@ -555,6 +479,8 @@
             if(time_min > 20.30){
                 $('.seven_half').css('pointerEvents','none')
                 $('.seven_half').css("background","gray");
+                $('.eight_half').css('pointerEvents','none')
+                $('.eight_half').css("background","gray");
                 $('#something_selcted #threethirty_minute').css("display","none");
                 $('#something_selcted #threesixty_minute').css("display","none");
                 $('#something_selcted #threehund_minute').css("display","none");
@@ -574,6 +500,7 @@
     <script>
     $('#something_selcted').on('change', function(e) {
         var timePeriodMeeting =  this.value;
+        $('#duration').val(this.value);
             console.log(timePeriodMeeting)
        var time_slot =  $('#time_meeting').val();
         if(time_slot == 9 || time_slot == 10 || time_slot == 11 || time_slot == 12 || time_slot == 1 || time_slot == 2 || time_slot == 3 || time_slot == 4 || time_slot == 5 || time_slot == 6 || time_slot == 7 || time_slot == 8){
@@ -889,5 +816,1708 @@
     $('#current_date').on('input',function(e){
         alert('Changed!')
     });
+    </script>
+    <script>
+    <% if @start_at == 9 %>
+        $('.nine').addClass('disable_table'); 
+        <% if @total_duration_nine == 1.0 %>     
+            $('.nine_half').addClass('disable_table'); 
+        <% end %>
+        <% if @total_duration_nine == 1.30 %>   
+            $('.nine_half').addClass('disable_table'); 
+            $('.ten').addClass('disable_table');  
+        <% end %>
+        <% if @total_duration_nine == 2.0 %>    
+            $('.nine_half').addClass('disable_table');  
+            $('.ten').addClass('disable_table');
+            $('.ten_half').addClass('disable_table');
+        <% end %>
+        <% if @total_duration_nine == 2.30 %>    
+            $('.nine_half').addClass('disable_table');  
+            $('.ten').addClass('disable_table');
+            $('.ten_half').addClass('disable_table');
+            $('.elevan').addClass('disable_table');
+        <% end %>
+        <% if @total_duration_nine == 3.0 %>
+            $('.nine_half').addClass('disable_table');  
+            $('.ten').addClass('disable_table');
+            $('.ten_half').addClass('disable_table')
+            $('.elevan').addClass('disable_table')
+            $('.elevan_half').addClass('disable_table');
+        <% end %>
+        <% if @total_duration_nine == 3.30 %>
+            $('.nine_half').addClass('disable_table');  
+            $('.ten').addClass('disable_table');
+            $('.ten_half').addClass('disable_table')
+            $('.elevan').addClass('disable_table')
+            $('.elevan_half').addClass('disable_table');
+            $('.twalve').addClass('disable_table');
+            
+        <% end %>
+        <% if @total_duration_nine == 4.0 %>
+            $('.nine_half').addClass('disable_table');  
+            $('.ten').addClass('disable_table');
+            $('.ten_half').addClass('disable_table')
+            $('.elevan').addClass('disable_table')
+            $('.elevan_half').addClass('disable_table');
+            $('.twalve').addClass('disable_table');
+            $('.twalve_half').addClass('disable_table');      
+        <% end %>
+        <% if @total_duration_nine == 4.30 %>
+            $('.nine_half').addClass('disable_table');  
+            $('.ten').addClass('disable_table');
+            $('.ten_half').addClass('disable_table')
+            $('.elevan').addClass('disable_table')
+            $('.elevan_half').addClass('disable_table');
+            $('.twalve').addClass('disable_table');
+            $('.twalve_half').addClass('disable_table');
+            $('.new_one').addClass('disable_table');                        
+        <% end %>
+        <% if @total_duration_nine == 5.0 %>
+            $('.nine_half').addClass('disable_table');  
+            $('.ten').addClass('disable_table');
+            $('.ten_half').addClass('disable_table')
+            $('.elevan').addClass('disable_table')
+            $('.elevan_half').addClass('disable_table');
+            $('.twalve').addClass('disable_table');
+            $('.twalve_half').addClass('disable_table');
+            $('.new_one').addClass('disable_table');  
+            $('.one_half').addClass('disable_table');                                    
+        <% end %>
+        <% if @total_duration_nine == 5.30 %>
+            $('.nine_half').addClass('disable_table');  
+            $('.ten').addClass('disable_table');
+            $('.ten_half').addClass('disable_table')
+            $('.elevan').addClass('disable_table')
+            $('.elevan_half').addClass('disable_table');
+            $('.twalve').addClass('disable_table');
+            $('.twalve_half').addClass('disable_table');
+            $('.new_one').addClass('disable_table');  
+            $('.one_half').addClass('disable_table'); 
+            $('.two').addClass('disable_table');                                  
+        <% end %>
+        <% if @total_duration_nine == 6.0 %>
+            $('.nine_half').addClass('disable_table');  
+            $('.ten').addClass('disable_table');
+            $('.ten_half').addClass('disable_table')
+            $('.elevan').addClass('disable_table')
+            $('.elevan_half').addClass('disable_table');
+            $('.twalve').addClass('disable_table');
+            $('.twalve_half').addClass('disable_table');
+            $('.new_one').addClass('disable_table');  
+            $('.one_half').addClass('disable_table'); 
+            $('.two').addClass('disable_table'); 
+            $('.two_half').addClass('disable_table');                                                
+        <% end %>
+    <% end %>
+        <% if @start_at_nine_half == 9.30 %>
+            $('.nine_half').addClass('disable_table');
+            <% if @total_duration_nine_half == 1.0 %>     
+                $('.ten').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_nine_half == 1.30 %>   
+                $('.ten').addClass('disable_table');   
+                $('.ten_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_nine_half == 2.0 %>    
+                $('.ten').addClass('disable_table');
+                $('.ten_half').addClass('disable_table');
+                $('.elevan').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_nine_half == 2.30 %>    
+                $('.ten').addClass('disable_table');
+                $('.ten_half').addClass('disable_table');
+                $('.elevan').addClass('disable_table');
+                $('.elevan_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_nine_half == 3.0 %>
+                $('.nine_half').addClass('disable_table');  
+                $('.ten').addClass('disable_table');
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_nine_half == 3.30 %>
+                $('.nine_half').addClass('disable_table');  
+                $('.ten').addClass('disable_table');
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_nine_half == 4.0 %>
+                $('.nine_half').addClass('disable_table');  
+                $('.ten').addClass('disable_table');
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');             
+            <% end %>
+            <% if @total_duration_nine_half == 4.30 %>
+                $('.nine_half').addClass('disable_table');  
+                $('.ten').addClass('disable_table');
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');  
+                $('.one_half').addClass('disable_table');                         
+            <% end %>
+            <% if @total_duration_nine_half == 5.0 %>
+                $('.nine_half').addClass('disable_table');  
+                $('.ten').addClass('disable_table');
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');  
+                $('.one_half').addClass('disable_table'); 
+                $('.two').addClass('disable_table');                                                                                   
+            <% end %>
+            <% if @total_duration_nine_half == 5.0 %>
+                $('.nine_half').addClass('disable_table');  
+                $('.ten').addClass('disable_table');
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');  
+                $('.one_half').addClass('disable_table'); 
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table');  
+            <% end %>
+        <% end %>
+        <% if @start_at_ten == 10 %>
+            $('.ten').addClass('disable_table');
+            <% if @total_duration_ten == 1.0 %>
+                $('.ten_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten == 1.30 %>
+                $('.ten_half').addClass('disable_table');
+                $('.elevan').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten == 2.0 %>
+                $('.ten_half').addClass('disable_table');
+                $('.elevan').addClass('disable_table');
+                $('.elevan_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten == 2.30 %>
+                $('.ten_half').addClass('disable_table');
+                $('.elevan').addClass('disable_table');
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                
+            <% end %>
+            <% if @total_duration_ten == 3.0 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten == 3.30 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten == 4.0 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten == 4.30 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');            
+            <% end %>
+            <% if @total_duration_ten == 5.0 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table');                        
+            <% end %>
+            <% if @total_duration_ten == 5.30 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');                                     
+            <% end %>
+            <% if @total_duration_ten == 6.0 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');                                                 
+            <% end %>
+        <% end %>
+        <% if @start_at_ten_half == 10.30 %>
+            $('.ten_half').addClass('disable_table');
+            <% if @total_duration_ten_half == 1.0 %>
+                $('.elevan').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten_half == 1.30 %>
+                $('.ten_half').addClass('disable_table');
+                $('.elevan').addClass('disable_table');
+                $('.elevan_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten_half == 2.0 %>
+                $('.ten_half').addClass('disable_table');
+                $('.elevan').addClass('disable_table');
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten_half == 2.30 %>
+                $('.ten_half').addClass('disable_table');
+                $('.elevan').addClass('disable_table');
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten_half == 3.0 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten_half == 3.30 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_ten_half == 4.0 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_ten_half == 4.30 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table');            
+            <% end %>
+            <% if @total_duration_ten_half == 5.0 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');                        
+            <% end %>
+            <% if @total_duration_ten_half == 5.30 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');                                    
+            <% end %>
+            <% if @total_duration_ten_half == 6.0 %>
+                $('.ten_half').addClass('disable_table')
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');                                                
+            <% end %>
+        <% end %>
+        <% if @start_at_elevan == 11.0 %>
+            console.log("mannuuuu");
+            $('.elevan').addClass('disable_table');
+            <% if @total_duration_elevan == 1.0 %>
+                $('.elevan_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan == 1.30 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan == 2.0 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan == 2.30 %>
+                $('.elevan').addClass('disable_table');
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan == 3.0 %>
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan == 3.30 %>
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan == 4.0 %>
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan == 4.30 %>
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');           
+            <% end %>
+            <% if @total_duration_elevan == 5.0 %>
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');                      
+            <% end %>
+            <% if @total_duration_elevan == 5.30 %>
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');                                  
+            <% end %>
+            <% if @total_duration_elevan == 6.0 %>
+                console.log("demiiii")
+                $('.elevan').addClass('disable_table')
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');  
+                $('.four_half').addClass('disable_table');                                              
+            <% end %>
+        <% end %>
+        <% if @start_at_elevan_half == 11.30 %>
+            $('.elevan_half').addClass('disable_table');
+            <% if @total_duration_elevan_half == 1.0 %>
+                $('.twalve').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan_half == 1.30 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan_half == 2.0 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan_half == 2.30 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan_half == 3.0 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan_half == 3.30 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan_half == 4.0 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_elevan_half == 4.30 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');         
+            <% end %>
+            <% if @total_duration_elevan_half == 5.0 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');                    
+            <% end %>
+            <% if @total_duration_elevan_half == 5.30 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');                                  
+            <% end %>
+            <% if @total_duration_elevan_half == 6.0 %>
+                $('.elevan_half').addClass('disable_table');
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');  
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');                                           
+            <% end %>
+        <% end %>
+        <% if @start_at_twelve == 12.0 %>
+            $('.twalve').addClass('disable_table');
+            <% if @total_duration_twelve == 1.0 %>
+                $('.twalve_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve == 1.30 %>
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                
+            <% end %>
+            <% if @total_duration_twelve == 2.0 %>
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve == 2.30 %>
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve == 3.0 %>
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve == 3.30 %>
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve == 4.0 %>
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve == 4.30 %>
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');    
+                $('.four').addClass('disable_table');     
+            <% end %>
+            <% if @total_duration_twelve == 5.0 %>
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');                   
+            <% end %>
+            <% if @total_duration_twelve == 5.30 %>
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');                               
+            <% end %>
+            <% if @total_duration_twelve == 6.0 %>
+                $('.twalve').addClass('disable_table');
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');  
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table');                                        
+            <% end %>
+        <% end %>
+        <% if @start_at_twelve_half == 12.30 %>
+            $('.twalve_half').addClass('disable_table');
+            <% if @total_duration_twelve_half == 1.0 %>
+                $('.new_one').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve_half == 1.30 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                
+            <% end %>
+            <% if @total_duration_twelve_half == 2.0 %>
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve_half == 2.30 %>
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve_half == 3.0 %>
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve_half == 3.30 %>
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve_half == 4.0 %>
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_twelve_half == 4.30 %>
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');    
+                $('.four').addClass('disable_table');   
+                $('.four_half').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_twelve_half == 5.0 %>
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');                
+            <% end %>
+            <% if @total_duration_twelve_half == 5.30 %>
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table');                              
+            <% end %>
+            <% if @total_duration_twelve_half == 6.0 %>
+                $('.twalve_half').addClass('disable_table');
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');  
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');                                       
+            <% end %>
+        <% end %>
+        <% if @start_at_one == 1.0 %>
+            $('.new_one').addClass('disable_table');
+            <% if @total_duration_one == 1.0 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');                
+            <% end %>
+            <% if @total_duration_one == 1.30 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');                
+            <% end %>
+            <% if @total_duration_one == 2.0 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_one == 2.30 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_one == 3.0 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_one == 3.30 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_one == 4.0 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_one == 4.30 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');    
+                $('.four').addClass('disable_table');   
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_one == 5.0 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table');             
+            <% end %>
+            <% if @total_duration_one == 5.30 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table');   
+                $('.six').addClass('disable_table');                           
+            <% end %>
+            <% if @total_duration_one == 6.0 %>
+                $('.new_one').addClass('disable_table');
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');  
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');  
+                $('.six_half').addClass('disable_table');                                     
+            <% end %>
+        <% end %>
+        <% if @start_at_one_half == 1.30 %>
+            $('.one_half').addClass('disable_table');
+            <% if @total_duration_one_half == 1.0 %>
+                $('.two').addClass('disable_table');                
+            <% end %>
+            <% if @total_duration_one_half == 1.30 %>
+                $('.two').addClass('disable_table');    
+                $('.two_half').addClass('disable_table');            
+            <% end %>
+            <% if @total_duration_one_half == 2.0 %>
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_one_half == 2.30 %>
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_one_half == 3.0 %>
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_one_half == 3.30 %>
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_one_half == 4.0 %>
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_one_half == 4.30 %>
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');    
+                $('.four').addClass('disable_table');   
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_one_half == 5.0 %>
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table');             
+            <% end %>
+            <% if @total_duration_one_half == 5.30 %>
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table');   
+                $('.six').addClass('disable_table');   
+                $('.six_half').addClass('disable_table');                        
+            <% end %>
+            <% if @total_duration_one_half == 6.0 %>
+                $('.one_half').addClass('disable_table');
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');  
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');  
+                $('.six_half').addClass('disable_table');   
+                $('.seven').addClass('disable_table');                                  
+            <% end %>
+        <% end %>
+
+        
+        <% if @start_at_two == 2.0 %>
+            $('.two').addClass('disable_table');
+            <% if @total_duration_two == 1.0 %>
+                $('.two_half').addClass('disable_table');                
+            <% end %>
+            <% if @total_duration_two == 1.30 %>
+                $('.two').addClass('disable_table');    
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');             
+            <% end %>
+            <% if @total_duration_two == 2.0 %>
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_two == 2.30 %>
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_two == 3.0 %>
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_two == 3.30 %>
+                $('.two').addClass('disable_table');
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_two == 4.0 %>
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');
+                $('.five_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_two == 4.30 %>
+                $('.two').addClass('disable_table'); 
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');    
+                $('.four').addClass('disable_table');   
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_two == 5.0 %>
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');             
+            <% end %>
+            <% if @total_duration_two == 5.30 %>
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table');   
+                $('.six').addClass('disable_table');   
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table');                        
+            <% end %>
+            <% if @total_duration_two == 6.0 %>
+                $('.two').addClass('disable_table');  
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');  
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');  
+                $('.six_half').addClass('disable_table');   
+                $('.seven').addClass('disable_table');   
+                $('.seven_half').addClass('disable_table');                                
+            <% end %>
+        <% end %>
+        <% if @start_at_two_half == 2.30 %>
+            $('.two_half').addClass('disable_table');
+            <% if @total_duration_two_half == 1.0 %>
+                $('.two_half').addClass('disable_table');  
+                $('.three').addClass('disable_table');              
+            <% end %>
+            <% if @total_duration_two_half == 1.30 %>   
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');     
+                $('.three_half').addClass('disable_table');         
+            <% end %>
+            <% if @total_duration_two_half == 2.0 %>
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table'); 
+                $('.four').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_two_half == 2.30 %>
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_two_half == 3.0 %>
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_two_half == 3.30 %>
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_two_half == 4.0 %>
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_two_half == 4.30 %>
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');    
+                $('.four').addClass('disable_table');   
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table');
+                $('.six_half').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_two_half == 5.0 %>
+                $('.two_half').addClass('disable_table');
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');
+                $('.seven').addClass('disable_table');              
+            <% end %>
+            <% if @total_duration_two_half == 5.30 %>
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table');   
+                $('.six').addClass('disable_table');   
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table');     
+                $('.seven_half').addClass('disable_table');                    
+            <% end %>
+            <% if @total_duration_two_half == 6.0 %> 
+                $('.two_half').addClass('disable_table'); 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');  
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');  
+                $('.six_half').addClass('disable_table');   
+                $('.seven').addClass('disable_table');   
+                $('.seven_half').addClass('disable_table');    
+                $('.eight').addClass('disable_table');                             
+            <% end %>
+        <% end %>
+        <% if @start_at_three == 3.0 %>
+            $('.three').addClass('disable_table');
+            <% if @total_duration_three == 1.0 %>
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');              
+            <% end %>
+            <% if @total_duration_three == 1.30 %>   
+                $('.three').addClass('disable_table');     
+                $('.three_half').addClass('disable_table');    
+                $('.four').addClass('disable_table');    
+            <% end %>
+            <% if @total_duration_three == 2.0 %>
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table'); 
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_three == 2.30 %>
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table'); 
+                $('.five').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_three == 3.0 %>
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_three == 3.30 %>
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_three == 4.0 %>
+                $('.three').addClass('disable_table');
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_three == 4.30 %>
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');    
+                $('.four').addClass('disable_table');   
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table');
+                $('.six_half').addClass('disable_table');  
+                $('.seven').addClass('disable_table');
+            <% end %>
+            <% if @total_duration_three == 5.0 %>
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table');             
+            <% end %>
+            <% if @total_duration_three == 5.30 %>
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table');   
+                $('.six').addClass('disable_table');   
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table');     
+                $('.seven_half').addClass('disable_table');    
+                $('.eight').addClass('disable_table');                
+            <% end %>
+            <% if @total_duration_three == 6.0 %> 
+                $('.three').addClass('disable_table');  
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');  
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');  
+                $('.six_half').addClass('disable_table');   
+                $('.seven').addClass('disable_table');   
+                $('.seven_half').addClass('disable_table');    
+                $('.eight').addClass('disable_table');  
+                $('.eight_half').addClass('disable_table');                           
+            <% end %>
+        <% end %>
+        <% if @start_at_three_half == 3.30 %>
+            $('.three_half').addClass('disable_table');
+            <% if @total_duration_three_half == 1.0 %>
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');              
+            <% end %>
+            <% if @total_duration_three_half == 1.30 %>       
+                $('.three_half').addClass('disable_table');    
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');    
+            <% end %>
+            <% if @total_duration_three_half == 2.0 %>
+                $('.three_half').addClass('disable_table'); 
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_three_half == 2.30 %>
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table'); 
+                $('.five').addClass('disable_table');
+                $('.five_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_three_half == 3.0 %>
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_three_half == 3.30 %>
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');
+                $('.six_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_three_half == 4.0 %>
+                $('.three_half').addClass('disable_table');
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');
+                $('.seven').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_three_half == 4.30 %>
+                $('.three_half').addClass('disable_table');    
+                $('.four').addClass('disable_table');   
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table');
+                $('.six_half').addClass('disable_table');  
+                $('.seven').addClass('disable_table');
+                $('.seven_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_three_half == 5.0 %>
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table');  
+                $('.eight').addClass('disable_table');            
+            <% end %>
+            <% if @total_duration_three_half == 5.30 %>
+                $('.three_half').addClass('disable_table');  
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table');   
+                $('.six').addClass('disable_table');   
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table');     
+                $('.seven_half').addClass('disable_table');    
+                $('.eight').addClass('disable_table');  
+                $('.eight_half').addClass('disable_table');               
+            <% end %>
+        <% end %>
+        <% if @start_at_four == 4.0 %>
+            $('.four').addClass('disable_table');
+            <% if @total_duration_four == 1.0 %>
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');              
+            <% end %>
+            <% if @total_duration_four == 1.30 %>       
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');  
+                $('.five').addClass('disable_table');   
+            <% end %>
+            <% if @total_duration_four == 2.0 %>
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_four == 2.30 %>
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table'); 
+                $('.five').addClass('disable_table');
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_four == 3.0 %>
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_four == 3.30 %>
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_four == 4.0 %>
+                $('.four').addClass('disable_table');
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_four == 4.30 %>  
+                $('.four').addClass('disable_table');   
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table');
+                $('.six_half').addClass('disable_table');  
+                $('.seven').addClass('disable_table');
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_four == 5.0 %> 
+                $('.four').addClass('disable_table'); 
+                $('.four_half').addClass('disable_table');   
+                $('.five').addClass('disable_table');   
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table');  
+                $('.eight').addClass('disable_table');   
+                $('.eight_half').addClass('disable_table');          
+            <% end %>
+        <% end %>
+        <% if @start_at_four_half == 4.30 %>
+            $('.four_half').addClass('disable_table');
+            <% if @total_duration_four_half == 1.0 %>
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');               
+            <% end %>
+            <% if @total_duration_four_half == 1.30 %>       
+                $('.four_half').addClass('disable_table');  
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_four_half == 2.0 %> 
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_four_half == 2.30 %>
+                $('.four_half').addClass('disable_table'); 
+                $('.five').addClass('disable_table');
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_four_half == 3.0 %>
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_four_half == 3.30 %>
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table');
+                $('.seven_half').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_four_half == 4.0 %>
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_four_half == 4.30 %>  
+                $('.four_half').addClass('disable_table');
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table');
+                $('.six_half').addClass('disable_table');  
+                $('.seven').addClass('disable_table');
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table'); 
+                $('.eight_half').addClass('disable_table'); 
+            <% end %>
+        <% end %>
+        <% if @start_at_five == 5.0 %>
+            $('.five').addClass('disable_table');
+            <% if @total_duration_five == 1.0 %>
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');              
+            <% end %>
+            <% if @total_duration_five == 1.30 %>       
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_five == 2.0 %> 
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_five == 2.30 %>
+                $('.five').addClass('disable_table');
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_five == 3.0 %>
+                $('.five').addClass('disable_table');  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_five == 3.30 %>
+                $('.five').addClass('disable_table'); 
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table');
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_five == 4.0 %>
+                $('.five').addClass('disable_table');
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table'); 
+                $('.eight_half').addClass('disable_table'); 
+            <% end %>
+        <% end %>
+        <% if @start_at_five_half == 5.30 %>
+            $('.five_half').addClass('disable_table');
+            <% if @total_duration_five_half == 1.0 %>  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table');               
+            <% end %>
+            <% if @total_duration_five_half == 1.30 %>        
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_five_half == 2.0 %> 
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_five_half == 2.30 %>
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_five_half == 3.0 %>  
+                $('.five_half').addClass('disable_table');
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_five_half == 3.30 %>
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table');
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table');
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table');  
+                $('.eight_half').addClass('disable_table'); 
+            <% end %>
+        <% end %>
+        <% if @start_at_six == 6.0 %>
+            $('.six').addClass('disable_table');
+            <% if @total_duration_six == 1.0 %>  
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table');               
+            <% end %>
+            <% if @total_duration_six == 1.30 %>        
+                $('.five_half').addClass('disable_table'); 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_six == 2.0 %> 
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table');
+                $('.seven_half').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_six == 2.30 %>
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_six == 3.0 %>  
+                $('.six').addClass('disable_table'); 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table'); 
+                $('.eight_half').addClass('disable_table'); 
+            <% end %>
+        
+        <% end %>
+        <% if @start_at_six_half == 6.30 %>
+            $('.six_half').addClass('disable_table');
+            <% if @total_duration_six_half == 1.0 %>   
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table');               
+            <% end %>
+            <% if @total_duration_six_half == 1.30 %>       
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_six_half == 2.0 %> 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table');
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table'); 
+            <% end %>
+            <% if @total_duration_six_half == 2.30 %> 
+                $('.six_half').addClass('disable_table'); 
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table'); 
+                $('.eight_half').addClass('disable_table'); 
+            <% end %>
+        <% end %>
+        <% if @start_at_seven == 7.0 %>
+            $('.seven').addClass('disable_table');
+            <% if @total_duration_seven == 1.0 %>   
+                $('.seven').addClass('disable_table');   
+                $('.seven_half').addClass('disable_table');              
+            <% end %>
+            <% if @total_duration_seven == 1.30 %>        
+                $('.seven').addClass('disable_table'); 
+                $('.seven_half').addClass('disable_table');  
+                $('.eight').addClass('disable_table');  
+            <% end %>
+            <% if @total_duration_seven == 2.0 %> 
+                $('.seven').addClass('disable_table');
+                $('.seven_half').addClass('disable_table'); 
+                $('.eight').addClass('disable_table'); 
+                $('.eight_half').addClass('disable_table'); 
+            <% end %>
+        <% end %>
+        <% if @start_at_seven_half == 7.30 %>
+            $('.seven_half').addClass('disable_table');
+            <% if @total_duration_seven_half == 1.0 %>     
+                $('.seven_half').addClass('disable_table');  
+                $('.eight').addClass('disable_table');             
+            <% end %>
+            <% if @total_duration_seven_half == 1.30 %>        
+                $('.seven_half').addClass('disable_table');
+                $('.eight').addClass('disable_table');   
+                $('.eight_half').addClass('disable_table');  
+            <% end %>
+        <% end %>
+        <% if @start_at_eight == 8.0 %>
+            $('.eight').addClass('disable_table');
+            <% if @total_duration_eight == 1.0 %>     
+                $('.eight_half').addClass('disable_table');          
+            <% end %>
+        <% end %>
+        <% if @start_at_eight_half == 8.30 %>
+            $('.eight_half').addClass('disable_table');
+        <% end %>
     </script>
 </body>    

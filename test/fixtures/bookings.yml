@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  booking_date: 2018-02-02 12:08:48
+  booking_start_time: 1.5
+  duration: 1.5
+  seats: 1
+
+two:
+  user_id: 1
+  booking_date: 2018-02-02 12:08:48
+  booking_start_time: 1.5
+  duration: 1.5
+  seats: 1
