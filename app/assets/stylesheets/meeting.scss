@@ -23,6 +23,7 @@ margin-top: 10px;
     padding: 9px;
     margin-left: 0px !important;
     margin-right: 0px !important;
+    padding-left: 0px !important;
 }
 .two{
     border: 1px solid;
@@ -82,9 +83,9 @@ margin-top: 10px;
     width: 50%;
     height: 35px;
 }
-.lef-col{
+.left-col{
     height: 100%;
-    width: 11%;
+    width: 116px;
     position: fixed;
     background: #444;
     z-index: 1;
@@ -108,7 +109,54 @@ margin-top: 10px;
         width: 100% !important;
     }
 }
-
+@media only screen and (max-width: 768px) {
+    #datetimepicker1{
+        width: 100% !important;
+    }
+    .select_seats_meeting{
+        width: 100% !important;
+    }
+    
+}
+@media only screen and (max-width: 712px) {
+    .right-col{
+        padding-left: 40px;
+    }
+    #time_meeting{
+        width: 100% !important;
+    }
+    .start_at_time{
+        width: 100% !important;
+    }
+    .duration_meeting{
+        width: 100% !important;
+    }
+    .submit_booking{
+        width: 100% !important;
+    }
+    
+}
+// .menu-coloum{
+//         text-shadow: rgba(0,0,0,0.25) 0 -1px 0;
+//         background: linear-gradient(#262626, #262622),#2A3F54;
+//         box-shadow: rgba(0,0,0,0.25) 0 1px 0, inset rgba(255,255,255,0.16) 0 1px 0;
+    
+// }
+.select_item{
+    position: relative;
+    padding: 10px !important;
+    border-right: 5px solid #60BD6A;
+    text-shadow: rgba(0,0,0,0.25) 0 -1px 0;
+    background: linear-gradient(#262626, #262622),#2A3F54;
+    box-shadow: rgba(0,0,0,0.25) 0 1px 0, inset rgba(255,255,255,0.16) 0 1px 0;
+    z-index: 9999;
+    left: -7px;
+    width: 106%;
+}
+a:hover{
+    color: #ffffff !important;
+    text-decoration: none;
+}
 .menu-coloum{
     color: white;
     margin-left: 10px;
@@ -120,4 +168,14 @@ margin-top: 10px;
 .disable_table{
     pointer-events: none;
     background: gray;
+}
+.submit_booking{
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    padding: 6px;
+    background: #60bd6a;
+    border: 1px solid #60bd6a;
+    color: #fff;
+    border-radius: 4px;
 }

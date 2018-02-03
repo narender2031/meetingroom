@@ -1,11 +1,11 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <body>    
     <div class="row">
         <div class="row">
-            <div class="col-md-2 col-sm-2 col-xs-1">
-                <div class="lef-col">
+            <div class="col-md-1 col-sm-1 col-xs-2">
+                <div class="left-col">
                     <div class="brand-logo">
                         <center>
                             <%= image_tag "brand.png", class:"", style:"width: 84%;"%>
@@ -13,14 +13,16 @@
                     </div>
                     <div class="menu">
                         <ul>
-                            <li>
-                                <a class="menu-coloum"><i class="fas fa-users"></i> MeetingRoom</a>
+                            <li class="select_item">
+                                <%= link_to meeting_path,class:"menu-coloum" do %>
+                                    <i class="fas fa-users"></i> Meeting 
+                                <% end %>
                             </li>
                         </ul>
                     </div>    
                 </div>
             </div>
-            <div class="col-md-10 col-sm-10 col-xs-11">
+            <div class="col-md-11 col-sm-11 col-xs-10">
                 <div class="right-col">
                     <div class="row navi-bar">
                         <div class="bar">
@@ -32,245 +34,249 @@
                             </div>
                         </div>    
                     </div>
-                    <%= form_for @bookings do |f| %>
-                        <div class="row" style="padding:5px;">
-                            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-left:-18px;">
-                                <div class="row">
-                                    <div class="select-datetime">
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker1' >
-                                                <input type='hidden' class="form-control"  id="current_date" placeholder="Select date" onchange="myFunction()"/>
-                                                <%= f.hidden_field :booking_date, id:"date_of_booking", value:""%>
-                                            </div>   
-                                        </div>
-                                        <script type="text/javascript">
-                                            $(function () {
-                                                var today = new Date();
-                                                date = today.getDate() + parseInt(7)
-                                                var date = new Date();
-                                                date.setDate(date.getDate() + 7);
-                                                
-                                                var dateMsg = date.getDate()+'/'+ (date.getMonth()+1) +'/'+date.getFullYear();
-                                                
-                                                $('#datetimepicker1').datetimepicker({
-                                                    inline: true,
-                                                    defaultDate: "<%= @time_req%>",
-                                                    maxDate: date,
-                                                }).on('dp.change',function(e){
-                                                    console.log(e.date._d)
-                                                    $('#date_of_booking').val(e.date._d);
-                                                    var form = new FormData();
-                                                    form.append("value", e.date._d);
+                    <div class="container">
+                        <%= form_for @bookings do |f| %>
+                            <div class="row" style="padding:5px;">
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-left:-18px;">
+                                    <div class="row">
+                                        <div class="select-datetime">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1' >
+                                                    <input type='hidden' class="form-control"  id="current_date" placeholder="Select date" onchange="myFunction()"/>
+                                                    <%= f.hidden_field :booking_date, id:"date_of_booking", value:""%>
+                                                </div>   
+                                            </div>
+                                            <script type="text/javascript">
+                                                $(function () {
+                                                    var today = new Date();
+                                                    date = today.getDate() + parseInt(7)
+                                                    var date = new Date();
+                                                    date.setDate(date.getDate() + 7);
                                                     
-                                                    var settings = {
-                                                    "async": true,
-                                                    "crossDomain": true,
-                                                    "url": "http://localhost:3000/opi/auth",
-                                                    "method": "POST",
-                                                    "headers": {
-                                                        "authorization": "Token <%= @user.token%>",
-                                                        "cache-control": "no-cache",
-                                                        "postman-token": "0ce0baec-3fba-28e5-ef7f-02c165ddef3e"
-                                                    },
-                                                    "processData": false,
-                                                    "contentType": false,
-                                                    "mimeType": "multipart/form-data",
-                                                    "data": form
-                                                    }
+                                                    var dateMsg = date.getDate()+'/'+ (date.getMonth()+1) +'/'+date.getFullYear();
                                                     
-                                                    $.ajax(settings).done(function (response) {
-                                                    console.log(response);
-                                                    window.location.reload();
-                                                    });
-                                                })
-                                                ;
-                                                console.log($('#current_date').val())  
-                                                
-                                                
-                                            });
-                                        </script>
+                                                    $('#datetimepicker1').datetimepicker({
+                                                        inline: true,
+                                                        defaultDate: "<%= @time_req%>",
+                                                        maxDate: date,
+                                                    }).on('dp.change',function(e){
+                                                        console.log(e.date._d)
+                                                        $('#date_of_booking').val(e.date._d);
+                                                        var form = new FormData();
+                                                        form.append("value", e.date._d);
+                                                        
+                                                        var settings = {
+                                                        "async": true,
+                                                        "crossDomain": true,
+                                                        "url": "http://localhost:3000/opi/auth",
+                                                        "method": "POST",
+                                                        "headers": {
+                                                            "authorization": "Token <%= @user.token%>",
+                                                            "cache-control": "no-cache",
+                                                            "postman-token": "0ce0baec-3fba-28e5-ef7f-02c165ddef3e"
+                                                        },
+                                                        "processData": false,
+                                                        "contentType": false,
+                                                        "mimeType": "multipart/form-data",
+                                                        "data": form
+                                                        }
+                                                        
+                                                        $.ajax(settings).done(function (response) {
+                                                        console.log(response);
+                                                        window.location.reload();
+                                                        });
+                                                    })
+                                                    ;
+                                                    console.log($('#current_date').val())  
+                                                    
+                                                    
+                                                });
+                                            </script>
+                                        </div>    
                                     </div>    
-                                </div>    
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-left:-18px;">
-                                <div class="row">
-                                    <div class="select_quantity">
-                                        <%= f.select :seats,[ 2,4,6,8 ], {prompt: 'Select Seats'}, class:"select_seats_meeting" %>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="margin-left:-18px;">
+                                    <div class="row">
+                                        <div class="select_quantity">
+                                            <%= f.select :seats,[ 2,4,6,8 ], {prompt: 'Select Seats'}, class:"select_seats_meeting" %>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--<div class="row">
-                            <div class="select-locations">
-                                <center>
-                                    <div class="row">
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle location-for-user" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Home location of user
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                <button class="dropdown-item" type="button">Action</button>
-                                                <br>
-                                                <button class="dropdown-item" type="button">Another action</button>
-                                                <br>
-                                                <button class="dropdown-item" type="button">Something else here</button>
+                            <!--<div class="row">
+                                <div class="select-locations">
+                                    <center>
+                                        <div class="row">
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle location-for-user" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Home location of user
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                    <button class="dropdown-item" type="button">Action</button>
+                                                    <br>
+                                                    <button class="dropdown-item" type="button">Another action</button>
+                                                    <br>
+                                                    <button class="dropdown-item" type="button">Something else here</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </center>
-                            </div>
-                        </div>-->
-                        <div class="row"  style="margin-top:25px !important;">
-                            <h4><strong>Meeting room 1</strong></h4>
-                            <div class="meeting-room-booking">
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>9<p>
-                                    <div class="col-sm-6 one nine" id="9">
-                                    </div>
-                                    <div class="col-sm-6  one nine_half" id="9.30">
-                                    </div>
+                                    </center>
                                 </div>
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>10<p>
-                                    <div class="col-sm-6 one ten" id="10">
+                            </div>-->
+                            <div class="row"  style="margin-top:25px !important;">
+                                <h4><strong>Meeting room 1</strong></h4>
+                                <div class="meeting-room-booking">
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>9<p>
+                                        <div class="col-sm-6 one nine" id="9">
+                                        </div>
+                                        <div class="col-sm-6  one nine_half" id="9.30">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6  one ten_half" id="10.30">
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>10<p>
+                                        <div class="col-sm-6 one ten" id="10">
+                                        </div>
+                                        <div class="col-sm-6  one ten_half" id="10.30">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>11</p>
-                                    <div class="col-sm-6 one elevan" id="11">
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>11</p>
+                                        <div class="col-sm-6 one elevan" id="11">
+                                        </div>
+                                        <div class="col-sm-6 one elevan_half" id="11.30">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6 one elevan_half" id="11.30">
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>12<p>
+                                        <div class="col-sm-6  one twalve" id="12">
+                                        </div>
+                                        <div class="col-sm-6  one twalve_half" id="12.30">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>12<p>
-                                    <div class="col-sm-6  one twalve" id="12">
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>1<p>
+                                        <div class="col-sm-6 one new_one" id="1">
+                                        </div>
+                                        <div class="col-sm-6 one one_half" id="1.30">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6  one twalve_half" id="12.30">
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>2<p>
+                                        <div class="col-sm-6  one two" id="2">
+                                        </div>
+                                        <div class="col-sm-6  one two_half" id="2.30">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>1<p>
-                                    <div class="col-sm-6 one new_one" id="1">
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>3<p>
+                                        <div class="col-sm-6  one three" id="3">
+                                        </div>
+                                        <div class="col-sm-6 one three_half" id="3.30">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6 one one_half" id="1.30">
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>4<p>
+                                        <div class="col-sm-6 one four" id="4">
+                                        </div>
+                                        <div class="col-sm-6  one four_half" id="4.30">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>2<p>
-                                    <div class="col-sm-6  one two" id="2">
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>5<p>
+                                        <div class="col-sm-6  one five" id="5">
+                                        </div>
+                                        <div class="col-sm-6 one five_half" id="5.30">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6  one two_half" id="2.30">
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>6<p>
+                                        <div class="col-sm-6 one six" id="6">
+                                        </div>
+                                        <div class="col-sm-6  one six_half" id="6.30">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>3<p>
-                                    <div class="col-sm-6  one three" id="3">
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>7<p>
+                                        <div class="col-sm-6  one seven" id="7">
+                                        </div>
+                                        <div class="col-sm-6 one seven_half" id="7.30">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6 one three_half" id="3.30">
-                                    </div>
-                                </div>
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>4<p>
-                                    <div class="col-sm-6 one four" id="4">
-                                    </div>
-                                    <div class="col-sm-6  one four_half" id="4.30">
-                                    </div>
-                                </div>
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>5<p>
-                                    <div class="col-sm-6  one five" id="5">
-                                    </div>
-                                    <div class="col-sm-6 one five_half" id="5.30">
-                                    </div>
-                                </div>
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>6<p>
-                                    <div class="col-sm-6 one six" id="6">
-                                    </div>
-                                    <div class="col-sm-6  one six_half" id="6.30">
-                                    </div>
-                                </div>
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>7<p>
-                                    <div class="col-sm-6  one seven" id="7">
-                                    </div>
-                                    <div class="col-sm-6 one seven_half" id="7.30">
-                                    </div>
-                                </div>
-                                <div class="col-sm-1 col-xs-1 time-border">
-                                    <p>8<p>
-                                    <div class="col-sm-6  one eight" id="8">
-                                    </div>
-                                    <div class="col-sm-6 one eight_half" id="8.30">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row" style="margin-top:20px;">
-                            <div class="col-md-4 col-sm-3 col-xs-4">
-                                <div class="col-sm-1" id="taken">
-                                </div><span class="slots-avilable">Taken</span>
-                            </div>
-                            <div class="col-md-4 col-sm-3 col-xs-4">
-                                <div class="col-sm-1" id="empty">
-                                </div><span class="slots-avilable">Available</span>
-                            </div>
-                            <div class="col-md-4 col-sm-3 col-xs-4">
-                                <div class="col-sm-1" id="selected">
-                                </div><span class="slots-avilable">Selected</span>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:10px;">
-                            <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 5px;">
-                                <div class="row">
-                                    <div class="start_at">
-                                        <p> <strong>Start at</strong></p>
-                                        <p class="start_at_time">Start at time</p>
-                                        <%= f.hidden_field :booking_start_time, value:"", id:"time_meeting"%>
+                                    <div class="col-sm-1 col-xs-1 time-border">
+                                        <p>8<p>
+                                        <div class="col-sm-6  one eight" id="8">
+                                        </div>
+                                        <div class="col-sm-6 one eight_half" id="8.30">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 5px;">
-                                <div class="row">
-                                    <div class="duration">
-                                        <p><strong>Duration</strong></p>
-                                        <select name="cars" class="duration_meeting" id="something_selcted"style="height: 34px;display:none">
-                                        <option value="30" id="thirty_minute">30 Minute</option>
-                                        <option value="1" id="sixty_minute">1 Houe</option>
-                                        <option value="1.30" id="ninty_minute">1:30 Hour</option>
-                                        <option value="2" id="onetwenty_minute">2 Hour</option>
-                                        <option value="2.30 " id="onefifty_minute">2:30 Hour</option>
-                                        <option value="3" id="oneeighty_minute">3 Hour</option>
-                                        <option value="3.30" id="twoten_minute">3:30 Hour</option>
-                                        <option value="4" id="twofourty_minute">4 Hour</option>
-                                        <option value="4.30" id="twoseventy_minute">4:30 Hour</option>
-                                        <option value="5" id="threehund_minute">5 Hour</option>
-                                        <option value="5.30" id="threethirty_minute">5:30 Hour</option>
-                                        <option value="6" id="threesixty_minute">6 Hour</option>
-                                    </select>
-                                    <%= f.hidden_field :duration, id: "duration", value:"" %>
-                                    <%= f.hidden_field :user_id,  value: @user.id %>
-                                    <select name="cars" class="duration_meeting" id="no_selected" style="height: 34px; display:block">
-                                        <option disabled="" selected="selected" value="" class="">Duration</option>
-                                    </select>
+                            
+                            <div class="row" style="margin-top:20px;">
+                                <div class="col-md-4 col-sm-3 col-xs-4">
+                                    <div class="col-sm-1" id="taken">
+                                    </div><span class="slots-avilable">Taken</span>
+                                </div>
+                                <div class="col-md-4 col-sm-3 col-xs-4">
+                                    <div class="col-sm-1" id="empty">
+                                    </div><span class="slots-avilable">Available</span>
+                                </div>
+                                <div class="col-md-4 col-sm-3 col-xs-4">
+                                    <div class="col-sm-1" id="selected">
+                                    </div><span class="slots-avilable">Selected</span>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 5px;">
+                                    <div class="row">
+                                        <div class="start_at">
+                                            <p> <strong>Start at</strong></p>
+                                            <p class="start_at_time">Start at time</p>
+                                            <%= f.hidden_field :booking_start_time, value:"", id:"time_meeting"%>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 5px;">
+                                    <div class="row">
+                                        <div class="duration">
+                                            <p><strong>Duration</strong></p>
+                                            <select name="cars" class="duration_meeting" id="something_selcted"style="height: 34px;display:none">
+                                            <option value="30" id="thirty_minute">30 Minute</option>
+                                            <option value="1" id="sixty_minute">1 Houe</option>
+                                            <option value="1.30" id="ninty_minute">1:30 Hour</option>
+                                            <option value="2" id="onetwenty_minute">2 Hour</option>
+                                            <option value="2.30 " id="onefifty_minute">2:30 Hour</option>
+                                            <option value="3" id="oneeighty_minute">3 Hour</option>
+                                            <option value="3.30" id="twoten_minute">3:30 Hour</option>
+                                            <option value="4" id="twofourty_minute">4 Hour</option>
+                                            <option value="4.30" id="twoseventy_minute">4:30 Hour</option>
+                                            <option value="5" id="threehund_minute">5 Hour</option>
+                                            <option value="5.30" id="threethirty_minute">5:30 Hour</option>
+                                            <option value="6" id="threesixty_minute">6 Hour</option>
+                                        </select>
+                                        <%= f.hidden_field :duration, id: "duration", value:"" %>
+                                        <%= f.hidden_field :user_id,  value: @user.id %>
+                                        <select name="cars" class="duration_meeting" id="no_selected" style="height: 34px; display:block">
+                                            <option disabled="" selected="selected" value="" class="">Duration</option>
+                                        </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4">
+                            <div class="row">
+                                <div class="submition">
+                                    <div class="col-md-3 col-sm-3">
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <%= f.submit "Booking", class:"submit_booking"%>
+                                    </div>
+                                        <div class="col-md-3 col-sm-3">
+                                    </div>
+                                </div>    
                             </div>
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-                                <%= f.submit "Booking" %>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                            </div>
-                        </div>
-                    <% end %>
+                        <% end %>
+                    </div>    
                 </div>    
             </div>
         </div>
@@ -316,8 +322,6 @@
             var two_result = two.search('disable_table');
             var two_half = document.getElementById('2.30').className;
             var two_half_result = two_half.search('disable_table');
-
-            
             if(nine_result != -1){
                 $('#something_selcted #threesixty_minute').css("display","none"); 
                 $('#something_selcted #threethirty_minute').css("display","none"); 
@@ -1622,153 +1626,2228 @@
                 $('#something_selcted #sixty_minute').css("display","block");
             }
         }
+        else if(el == 12.30){
+            var one = document.getElementById('1').className;
+            var one_result = one.search('disable_table');
+            var one_half = document.getElementById('1.30').className;
+            var one_half_result = one_half.search('disable_table');
+            var two = document.getElementById('2').className;
+            var two_result = two.search('disable_table');
+            var two_half = document.getElementById('2.30').className;
+            var two_half_result = two_half.search('disable_table');
+            var three = document.getElementById('3').className;
+            var three_result = three.search('disable_table');
+            var three_h = document.getElementById('3.30').className;
+            var three__half_result = three_h.search('disable_table');
+            var four = document.getElementById('4').className;
+            var four_result = four.search('disable_table');
+            var four_half = document.getElementById('4.30').className;
+            var four_half_result = four_half.search('disable_table');
+            var five = document.getElementById('5').className;
+            var five_result = five.search('disable_table');
+            var five_h = document.getElementById('5.30').className;
+            var five_half_result = five_h.search('disable_table');
+            var six = document.getElementById('6').className;
+            var six_result = six.search('disable_table');
+            if(one_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
 
-        if (el <= 3){
-            $('#something_selcted #threesixty_minute').css("display","block"); 
-            $('#something_selcted #threethirty_minute').css("display","block"); 
-            $('#something_selcted #threehund_minute').css("display","block"); 
-            $('#something_selcted #twoseventy_minute').css("display","block"); 
-            $('#something_selcted #twofourty_minute').css("display","block"); 
-            $('#something_selcted #twoten_minute').css("display","block"); 
-            $('#something_selcted #oneeighty_minute').css("display","block"); 
-            $('#something_selcted #onefifty_minute').css("display","block");
-            $('#something_selcted #onetwenty_minute').css("display","block");
-            $('#something_selcted #ninty_minute').css("display","block");
-            $('#something_selcted #sixty_minute').css("display","block");
+            } 
+            else if(one_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(two_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(two_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(three_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(three__half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(four_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(four_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","block"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
         }
-        if(el == 3.30){
-            console.log("arjun");
-           $('#something_selcted #threesixty_minute').css("display","none"); 
-           $('#something_selcted #threethirty_minute').css("display","block"); 
-           $('#something_selcted #threehund_minute').css("display","block"); 
-           $('#something_selcted #twoseventy_minute').css("display","block"); 
-           $('#something_selcted #twofourty_minute').css("display","block"); 
-           $('#something_selcted #twoten_minute').css("display","block"); 
-           $('#something_selcted #oneeighty_minute').css("display","block"); 
-           $('#something_selcted #onefifty_minute').css("display","block");
-           $('#something_selcted #onetwenty_minute').css("display","block");
-           $('#something_selcted #ninty_minute').css("display","block");
-           $('#something_selcted #sixty_minute').css("display","block");
-       }
-        
+        else if(el == 1){
+            
+            var one_half = document.getElementById('1.30').className;
+            var one_half_result = one_half.search('disable_table');
+            var two = document.getElementById('2').className;
+            var two_result = two.search('disable_table');
+            var two_half = document.getElementById('2.30').className;
+            var two_half_result = two_half.search('disable_table');
+            var three = document.getElementById('3').className;
+            var three_result = three.search('disable_table');
+            var three_h = document.getElementById('3.30').className;
+            var three__half_result = three_h.search('disable_table');
+            var four = document.getElementById('4').className;
+            var four_result = four.search('disable_table');
+            var four_half = document.getElementById('4.30').className;
+            var four_half_result = four_half.search('disable_table');
+            var five = document.getElementById('5').className;
+            var five_result = five.search('disable_table');
+            var five_h = document.getElementById('5.30').className;
+            var five_half_result = five_h.search('disable_table');
+            var six = document.getElementById('6').className;
+            var six_result = six.search('disable_table');
+            var six_half = document.getElementById('6.30').className;
+            var six_half_result = six_half.search('disable_table');
+             if(two_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(two_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(three_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(three__half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(four_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(four_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","block"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
+        }
+        else if(el == 1.30){
+            var two = document.getElementById('2').className;
+            var two_result = two.search('disable_table');
+            var two_half = document.getElementById('2.30').className;
+            var two_half_result = two_half.search('disable_table');
+            var three = document.getElementById('3').className;
+            var three_result = three.search('disable_table');
+            var three_h = document.getElementById('3.30').className;
+            var three__half_result = three_h.search('disable_table');
+            var four = document.getElementById('4').className;
+            var four_result = four.search('disable_table');
+            var four_half = document.getElementById('4.30').className;
+            var four_half_result = four_half.search('disable_table');
+            var five = document.getElementById('5').className;
+            var five_result = five.search('disable_table');
+            var five_h = document.getElementById('5.30').className;
+            var five_half_result = five_h.search('disable_table');
+            var six = document.getElementById('6').className;
+            var six_result = six.search('disable_table');
+            var six_half = document.getElementById('6.30').className;
+            var six_half_result = six_half.search('disable_table');
+            var seven = document.getElementById('7').className;
+            var six_result = seven.search('disable_table');
+             if(two_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            } 
+            else if(two_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(three_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(three__half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(four_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(four_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(seven_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","block"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
+        }
+        else if(el == 2){
+            var two_half = document.getElementById('2.30').className;
+            var two_half_result = two_half.search('disable_table');
+            var three = document.getElementById('3').className;
+            var three_result = three.search('disable_table');
+            var three_h = document.getElementById('3.30').className;
+            var three__half_result = three_h.search('disable_table');
+            var four = document.getElementById('4').className;
+            var four_result = four.search('disable_table');
+            var four_half = document.getElementById('4.30').className;
+            var four_half_result = four_half.search('disable_table');
+            var five = document.getElementById('5').className;
+            var five_result = five.search('disable_table');
+            var five_h = document.getElementById('5.30').className;
+            var five_half_result = five_h.search('disable_table');
+            var six = document.getElementById('6').className;
+            var six_result = six.search('disable_table');
+            var six_half = document.getElementById('6.30').className;
+            var six_half_result = six_half.search('disable_table');
+            var seven = document.getElementById('7').className;
+            var seven_result = seven.search('disable_table');
+            var seven_half = document.getElementById('7.30').className;
+            var seven_half_result = seven_half.search('disable_table');
+            if(two_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            } 
+            else if(three_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(three__half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(four_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(four_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(seven_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(seven_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","block"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
+        }
+        else if(el == 2.30){
+            var three = document.getElementById('3').className;
+            var three_result = three.search('disable_table');
+            var three_h = document.getElementById('3.30').className;
+            var three__half_result = three_h.search('disable_table');
+            var four = document.getElementById('4').className;
+            var four_result = four.search('disable_table');
+            var four_half = document.getElementById('4.30').className;
+            var four_half_result = four_half.search('disable_table');
+            var five = document.getElementById('5').className;
+            var five_result = five.search('disable_table');
+            var five_h = document.getElementById('5.30').className;
+            var five_half_result = five_h.search('disable_table');
+            var six = document.getElementById('6').className;
+            var six_result = six.search('disable_table');
+            var six_half = document.getElementById('6.30').className;
+            var six_half_result = six_half.search('disable_table');
+            var seven = document.getElementById('7').className;
+            var seven_result = seven.search('disable_table');
+            var seven_half = document.getElementById('7.30').className;
+            var seven_half_result = seven_half.search('disable_table');
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            if(three_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            } 
+            else if(three__half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            } 
+            else if(four_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(four_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(seven_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(seven_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","block"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
+        }
+        else if(el == 3){
+            var three_h = document.getElementById('3.30').className;
+            var three__half_result = three_h.search('disable_table');
+            var four = document.getElementById('4').className;
+            var four_result = four.search('disable_table');
+            var four_half = document.getElementById('4.30').className;
+            var four_half_result = four_half.search('disable_table');
+            var five = document.getElementById('5').className;
+            var five_result = five.search('disable_table');
+            var five_h = document.getElementById('5.30').className;
+            var five_half_result = five_h.search('disable_table');
+            var six = document.getElementById('6').className;
+            var six_result = six.search('disable_table');
+            var six_half = document.getElementById('6.30').className;
+            var six_half_result = six_half.search('disable_table');
+            var seven = document.getElementById('7').className;
+            var seven_result = seven.search('disable_table');
+            var seven_half = document.getElementById('7.30').className;
+            var seven_half_result = seven_half.search('disable_table');
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(three__half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            } 
+            else if(four_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(four_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(seven_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(seven_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","block"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
+        }
+        else if(el == 3.30){
+            var four = document.getElementById('4').className;
+            var four_result = four.search('disable_table');
+            var four_half = document.getElementById('4.30').className;
+            var four_half_result = four_half.search('disable_table');
+            var five = document.getElementById('5').className;
+            var five_result = five.search('disable_table');
+            var five_h = document.getElementById('5.30').className;
+            var five_half_result = five_h.search('disable_table');
+            var six = document.getElementById('6').className;
+            var six_result = six.search('disable_table');
+            var six_half = document.getElementById('6.30').className;
+            var six_half_result = six_half.search('disable_table');
+            var seven = document.getElementById('7').className;
+            var seven_result = seven.search('disable_table');
+            var seven_half = document.getElementById('7.30').className;
+            var seven_half_result = seven_half.search('disable_table');
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(four_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }
+            else if(four_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(seven_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(seven_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","block"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
+        }
         else if(el == 4){
-            $('#something_selcted #threesixty_minute').css("display","none"); 
-            $('#something_selcted #threethirty_minute').css("display","none"); 
-            $('#something_selcted #threehund_minute').css("display","block"); 
-            $('#something_selcted #twoseventy_minute').css("display","block"); 
-            $('#something_selcted #twofourty_minute').css("display","block"); 
-            $('#something_selcted #twoten_minute').css("display","block"); 
-            $('#something_selcted #oneeighty_minute').css("display","block"); 
-            $('#something_selcted #onefifty_minute').css("display","block");
-            $('#something_selcted #onetwenty_minute').css("display","block");
-            $('#something_selcted #ninty_minute').css("display","block");
-            $('#something_selcted #sixty_minute').css("display","block");
+            var four_half = document.getElementById('4.30').className;
+            var four_half_result = four_half.search('disable_table');
+            var five = document.getElementById('5').className;
+            var five_result = five.search('disable_table');
+            var five_h = document.getElementById('5.30').className;
+            var five_half_result = five_h.search('disable_table');
+            var six = document.getElementById('6').className;
+            var six_result = six.search('disable_table');
+            var six_half = document.getElementById('6.30').className;
+            var six_half_result = six_half.search('disable_table');
+            var seven = document.getElementById('7').className;
+            var seven_result = seven.search('disable_table');
+            var seven_half = document.getElementById('7.30').className;
+            var seven_half_result = seven_half.search('disable_table');
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(four_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }
+            else if(five_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(five_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(seven_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(seven_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","block"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
         }
         else if(el == 4.30){
-            $('#something_selcted #threesixty_minute').css("display","none"); 
-            $('#something_selcted #threethirty_minute').css("display","none"); 
-            $('#something_selcted #threehund_minute').css("display","none"); 
-            $('#something_selcted #twoseventy_minute').css("display","block"); 
-            $('#something_selcted #twofourty_minute').css("display","block"); 
-            $('#something_selcted #twoten_minute').css("display","block"); 
-            $('#something_selcted #oneeighty_minute').css("display","block"); 
-            $('#something_selcted #onefifty_minute').css("display","block");
-            $('#something_selcted #onetwenty_minute').css("display","block");
-            $('#something_selcted #ninty_minute').css("display","block");
-            $('#something_selcted #sixty_minute').css("display","block");
+            var five = document.getElementById('5').className;
+            var five_result = five.search('disable_table');
+            var five_h = document.getElementById('5.30').className;
+            var five_half_result = five_h.search('disable_table');
+            var six = document.getElementById('6').className;
+            var six_result = six.search('disable_table');
+            var six_half = document.getElementById('6.30').className;
+            var six_half_result = six_half.search('disable_table');
+            var seven = document.getElementById('7').className;
+            var seven_result = seven.search('disable_table');
+            var seven_half = document.getElementById('7.30').className;
+            var seven_half_result = seven_half.search('disable_table');
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(five_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }
+            else if(five_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(seven_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(seven_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","block"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
         }
         else if(el == 5){
-            $('#something_selcted #threesixty_minute').css("display","none"); 
-            $('#something_selcted #threethirty_minute').css("display","none"); 
-            $('#something_selcted #threehund_minute').css("display","none"); 
-            $('#something_selcted #twoseventy_minute').css("display","none"); 
-            $('#something_selcted #twofourty_minute').css("display","block"); 
-            $('#something_selcted #twoten_minute').css("display","block"); 
-            $('#something_selcted #oneeighty_minute').css("display","block"); 
-            $('#something_selcted #onefifty_minute').css("display","block");
-            $('#something_selcted #onetwenty_minute').css("display","block");
-            $('#something_selcted #ninty_minute').css("display","block");
-            $('#something_selcted #sixty_minute').css("display","block");
+            var five_h = document.getElementById('5.30').className;
+            var five_half_result = five_h.search('disable_table');
+            var six = document.getElementById('6').className;
+            var six_result = six.search('disable_table');
+            var six_half = document.getElementById('6.30').className;
+            var six_half_result = six_half.search('disable_table');
+            var seven = document.getElementById('7').className;
+            var seven_result = seven.search('disable_table');
+            var seven_half = document.getElementById('7.30').className;
+            var seven_half_result = seven_half.search('disable_table');
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(five_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }
+            else if(six_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(six_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(seven_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(seven_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","block"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
         }
         else if(el == 5.30){
-            $('#something_selcted #threesixty_minute').css("display","none"); 
-            $('#something_selcted #threethirty_minute').css("display","none"); 
-            $('#something_selcted #threehund_minute').css("display","none"); 
-            $('#something_selcted #twoseventy_minute').css("display","none"); 
-            $('#something_selcted #twofourty_minute').css("display","none"); 
-            $('#something_selcted #twoten_minute').css("display","block"); 
-            $('#something_selcted #oneeighty_minute').css("display","block"); 
-            $('#something_selcted #onefifty_minute').css("display","block");
-            $('#something_selcted #onetwenty_minute').css("display","block");
-            $('#something_selcted #ninty_minute').css("display","block");
-            $('#something_selcted #sixty_minute').css("display","block");
+            var six = document.getElementById('6').className;
+            var six_result = six.search('disable_table');
+            var six_half = document.getElementById('6.30').className;
+            var six_half_result = six_half.search('disable_table');
+            var seven = document.getElementById('7').className;
+            var seven_result = seven.search('disable_table');
+            var seven_half = document.getElementById('7.30').className;
+            var seven_half_result = seven_half.search('disable_table');
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(six_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }
+            else if(six_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(seven_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(seven_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","block"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
         }
         else if(el == 6){
-            $('#something_selcted #threesixty_minute').css("display","none"); 
-            $('#something_selcted #threethirty_minute').css("display","none"); 
-            $('#something_selcted #threehund_minute').css("display","none"); 
-            $('#something_selcted #twoseventy_minute').css("display","none"); 
-            $('#something_selcted #twofourty_minute').css("display","none"); 
-            $('#something_selcted #twoten_minute').css("display","none"); 
-            $('#something_selcted #oneeighty_minute').css("display","block"); 
-            $('#something_selcted #onefifty_minute').css("display","block");
-            $('#something_selcted #onetwenty_minute').css("display","block");
-            $('#something_selcted #ninty_minute').css("display","block");
-            $('#something_selcted #sixty_minute').css("display","block");
+            var six_half = document.getElementById('6.30').className;
+            var six_half_result = six_half.search('disable_table');
+            var seven = document.getElementById('7').className;
+            var seven_result = seven.search('disable_table');
+            var seven_half = document.getElementById('7.30').className;
+            var seven_half_result = seven_half.search('disable_table');
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(six_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }
+            else if(seven_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(seven_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","block"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
         }
         else if(el == 6.30){
-            $('#something_selcted #threesixty_minute').css("display","none"); 
-            $('#something_selcted #threethirty_minute').css("display","none"); 
-            $('#something_selcted #threehund_minute').css("display","none"); 
-            $('#something_selcted #twoseventy_minute').css("display","none"); 
-            $('#something_selcted #twofourty_minute').css("display","none"); 
-            $('#something_selcted #twoten_minute').css("display","none"); 
-            $('#something_selcted #oneeighty_minute').css("display","none"); 
-            $('#something_selcted #onefifty_minute').css("display","block");
-            $('#something_selcted #onetwenty_minute').css("display","block");
-            $('#something_selcted #ninty_minute').css("display","block");
-            $('#something_selcted #sixty_minute').css("display","block");
+            var seven = document.getElementById('7').className;
+            var seven_result = seven.search('disable_table');
+            var seven_half = document.getElementById('7.30').className;
+            var seven_half_result = seven_half.search('disable_table');
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(seven_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }else if(seven_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }else if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","block");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
         }
         else if(el == 7){
-            $('#something_selcted #threesixty_minute').css("display","none"); 
-            $('#something_selcted #threethirty_minute').css("display","none"); 
-            $('#something_selcted #threehund_minute').css("display","none"); 
-            $('#something_selcted #twoseventy_minute').css("display","none"); 
-            $('#something_selcted #twofourty_minute').css("display","none"); 
-            $('#something_selcted #twoten_minute').css("display","none"); 
-            $('#something_selcted #oneeighty_minute').css("display","none"); 
-            $('#something_selcted #onefifty_minute').css("display","none");
-            $('#something_selcted #onetwenty_minute').css("display","block");
-            $('#something_selcted #ninty_minute').css("display","block");
-            $('#something_selcted #sixty_minute').css("display","block");
+            var seven_half = document.getElementById('7.30').className;
+            var seven_half_result = seven_half.search('disable_table');
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(seven_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }else if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","block");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
         }
         else if(el == 7.30){
-            $('#something_selcted #threesixty_minute').css("display","none"); 
-            $('#something_selcted #threethirty_minute').css("display","none"); 
-            $('#something_selcted #threehund_minute').css("display","none"); 
-            $('#something_selcted #twoseventy_minute').css("display","none"); 
-            $('#something_selcted #twofourty_minute').css("display","none"); 
-            $('#something_selcted #twoten_minute').css("display","none"); 
-            $('#something_selcted #oneeighty_minute').css("display","none"); 
-            $('#something_selcted #onefifty_minute').css("display","none");
-            $('#something_selcted #onetwenty_minute').css("display","none");
-            $('#something_selcted #ninty_minute').css("display","block");
-            $('#something_selcted #sixty_minute').css("display","block");
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }
+            else if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
+        }
+        else if(el == 7.30){
+            var eight = document.getElementById('8').className;
+            var eight_result = eight.search('disable_table');
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(eight_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }
+            else if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","block");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
         }
         else if(el == 8){
-            $('#something_selcted #threesixty_minute').css("display","none"); 
-            $('#something_selcted #threethirty_minute').css("display","none"); 
-            $('#something_selcted #threehund_minute').css("display","none"); 
-            $('#something_selcted #twoseventy_minute').css("display","none"); 
-            $('#something_selcted #twofourty_minute').css("display","none"); 
-            $('#something_selcted #twoten_minute').css("display","none"); 
-            $('#something_selcted #oneeighty_minute').css("display","none"); 
-            $('#something_selcted #onefifty_minute').css("display","none");
-            $('#something_selcted #onetwenty_minute').css("display","none");
-            $('#something_selcted #ninty_minute').css("display","none");
-            $('#something_selcted #sixty_minute').css("display","block");
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+             if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","block");
+            }
         }
         else if(el == 8.30){
+            var eight_half = document.getElementById('8.30').className;
+            var eight_half_result = eight_half.search('disable_table');
+            if(eight_half_result != -1){
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+
+            }
+            else{
+                $('#something_selcted #threesixty_minute').css("display","none"); 
+                $('#something_selcted #threethirty_minute').css("display","none"); 
+                $('#something_selcted #threehund_minute').css("display","none"); 
+                $('#something_selcted #twoseventy_minute').css("display","none"); 
+                $('#something_selcted #twofourty_minute').css("display","none"); 
+                $('#something_selcted #twoten_minute').css("display","none"); 
+                $('#something_selcted #oneeighty_minute').css("display","none"); 
+                $('#something_selcted #onefifty_minute').css("display","none");
+                $('#something_selcted #onetwenty_minute').css("display","none");
+                $('#something_selcted #ninty_minute').css("display","none");
+                $('#something_selcted #sixty_minute').css("display","none");
+            }
+        }
+        if(el == 8.30){
             $('#something_selcted #threesixty_minute').css("display","none"); 
             $('#something_selcted #threethirty_minute').css("display","none"); 
             $('#something_selcted #threehund_minute').css("display","none"); 
@@ -2302,7 +4381,7 @@
     </script>
     <script>
     $('#current_date').on('input',function(e){
-        alert('Changed!')
+        
     });
     </script>
     <script>

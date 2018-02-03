@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202063836) do
+ActiveRecord::Schema.define(version: 20180203084442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,20 @@ ActiveRecord::Schema.define(version: 20180202063836) do
     t.float "booking_start_time"
     t.float "duration"
     t.integer "seats"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "location_name"
+    t.integer "total_meeting_room"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meeting_rooms", force: :cascade do |t|
+    t.string "name"
+    t.integer "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,6 +52,7 @@ ActiveRecord::Schema.define(version: 20180202063836) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "meeting"
+    t.integer "location_id"
   end
 
 end
