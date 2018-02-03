@@ -1,6 +1,6 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <body>    
     <div class="row">
         <div class="row">
@@ -22,20 +22,39 @@
                     </div>    
                 </div>
             </div>
-            <div class="col-md-11 col-sm-11 col-xs-10">
+            <div class="col-md-11 col-sm-11 col-xs-10" style=" overflow: hidden;">
                 <div class="right-col">
                     <div class="row navi-bar">
                         <div class="bar">
-                            <div class="col-md-6 col-sm-6 col-xs-12 brand-logo">
-                                
+                            <div class="col-md-6 col-sm-6 col-xs-6 brand-logo">
+                            <% if @locations.blank? %>
+                            <% else %>
+                                <div class="dropdown" style="float:right">
+                                    <button class="btn btn-secondary dropdown-toggle location-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                       <% if current_user.location_id != nil %>
+                                            <%= @user_location.location_name %>
+                                       <% end %>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <% @locations.each do |location| %>
+                                            <ul>
+                                                <li class="location" id="dropdownlocation" data ="<%= location.id %>">
+                                                   <a class="locations_name"> <%= location.location_name %></a>
+                                                </li>
+                                            </ul>
+                                        <% end %>    
+                                    </div>
+                                </div>
+                            <% end %>    
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12 user-name">
+                            <div class="col-md-6 col-sm-6 col-xs-6 user-name">
                                 <p class="current-user-name"><%= @user.name %></p>
                             </div>
                         </div>    
                     </div>
                     <div class="container">
                         <%= form_for @bookings do |f| %>
+                            <fieldset>
                             <div class="row" style="padding:5px;">
                                 <div class="col-md-6 col-sm-6 col-xs-12" style="margin-left:-18px;">
                                     <div class="row">
@@ -124,93 +143,96 @@
                                 </div>
                             </div>-->
                             <div class="row"  style="margin-top:25px !important;">
-                                <h4><strong>Meeting room 1</strong></h4>
-                                <div class="meeting-room-booking">
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>9<p>
-                                        <div class="col-sm-6 one nine" id="9">
+                                <% @meeting_rooms.each do |meeting_room| %>
+                                    <h4><strong><%= meeting_room.name %></strong></h4>
+                                    <div class="meeting-room-booking">
+                                        <% a =  %>
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>9<p>
+                                            <div class="col-sm-6 one nine" id="9">
+                                            </div>
+                                            <div class="col-sm-6  one nine_half" id="9.30">
+                                            </div>
                                         </div>
-                                        <div class="col-sm-6  one nine_half" id="9.30">
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>10<p>
+                                            <div class="col-sm-6 one ten" id="10">
+                                            </div>
+                                            <div class="col-sm-6  one ten_half" id="10.30">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>11</p>
+                                            <div class="col-sm-6 one elevan" id="11">
+                                            </div>
+                                            <div class="col-sm-6 one elevan_half" id="11.30">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>12<p>
+                                            <div class="col-sm-6  one twalve" id="12">
+                                            </div>
+                                            <div class="col-sm-6  one twalve_half" id="12.30">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>1<p>
+                                            <div class="col-sm-6 one new_one" id="1">
+                                            </div>
+                                            <div class="col-sm-6 one one_half" id="1.30">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>2<p>
+                                            <div class="col-sm-6  one two" id="2">
+                                            </div>
+                                            <div class="col-sm-6  one two_half" id="2.30">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>3<p>
+                                            <div class="col-sm-6  one three" id="3">
+                                            </div>
+                                            <div class="col-sm-6 one three_half" id="3.30">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>4<p>
+                                            <div class="col-sm-6 one four" id="4">
+                                            </div>
+                                            <div class="col-sm-6  one four_half" id="4.30">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>5<p>
+                                            <div class="col-sm-6  one five" id="5">
+                                            </div>
+                                            <div class="col-sm-6 one five_half" id="5.30">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>6<p>
+                                            <div class="col-sm-6 one six" id="6">
+                                            </div>
+                                            <div class="col-sm-6  one six_half" id="6.30">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>7<p>
+                                            <div class="col-sm-6  one seven" id="7">
+                                            </div>
+                                            <div class="col-sm-6 one seven_half" id="7.30">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 col-xs-1 time-border">
+                                            <p>8<p>
+                                            <div class="col-sm-6  one eight" id="8">
+                                            </div>
+                                            <div class="col-sm-6 one eight_half" id="8.30">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>10<p>
-                                        <div class="col-sm-6 one ten" id="10">
-                                        </div>
-                                        <div class="col-sm-6  one ten_half" id="10.30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>11</p>
-                                        <div class="col-sm-6 one elevan" id="11">
-                                        </div>
-                                        <div class="col-sm-6 one elevan_half" id="11.30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>12<p>
-                                        <div class="col-sm-6  one twalve" id="12">
-                                        </div>
-                                        <div class="col-sm-6  one twalve_half" id="12.30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>1<p>
-                                        <div class="col-sm-6 one new_one" id="1">
-                                        </div>
-                                        <div class="col-sm-6 one one_half" id="1.30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>2<p>
-                                        <div class="col-sm-6  one two" id="2">
-                                        </div>
-                                        <div class="col-sm-6  one two_half" id="2.30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>3<p>
-                                        <div class="col-sm-6  one three" id="3">
-                                        </div>
-                                        <div class="col-sm-6 one three_half" id="3.30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>4<p>
-                                        <div class="col-sm-6 one four" id="4">
-                                        </div>
-                                        <div class="col-sm-6  one four_half" id="4.30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>5<p>
-                                        <div class="col-sm-6  one five" id="5">
-                                        </div>
-                                        <div class="col-sm-6 one five_half" id="5.30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>6<p>
-                                        <div class="col-sm-6 one six" id="6">
-                                        </div>
-                                        <div class="col-sm-6  one six_half" id="6.30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>7<p>
-                                        <div class="col-sm-6  one seven" id="7">
-                                        </div>
-                                        <div class="col-sm-6 one seven_half" id="7.30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-1 col-xs-1 time-border">
-                                        <p>8<p>
-                                        <div class="col-sm-6  one eight" id="8">
-                                        </div>
-                                        <div class="col-sm-6 one eight_half" id="8.30">
-                                        </div>
-                                    </div>
-                                </div>
+                                <% end %>    
                             </div>
                             
                             <div class="row" style="margin-top:20px;">
@@ -257,6 +279,8 @@
                                         </select>
                                         <%= f.hidden_field :duration, id: "duration", value:"" %>
                                         <%= f.hidden_field :user_id,  value: @user.id %>
+                                        <%= f.hidden_field :location_id,  value: @user.location_id %>
+
                                         <select name="cars" class="duration_meeting" id="no_selected" style="height: 34px; display:block">
                                             <option disabled="" selected="selected" value="" class="">Duration</option>
                                         </select>
@@ -275,6 +299,7 @@
                                     </div>
                                 </div>    
                             </div>
+                            </fieldset>
                         <% end %>
                     </div>    
                 </div>    
@@ -287,6 +312,37 @@
     $(document).ready(function(){
         $('.dropdown-toggle').dropdown();
     });
+    </script>
+    <script>
+    $(".location").click(function(){
+        var location_id = ($(this).attr('data'))
+        console.log(location_id);
+        var data = {
+            location: location_id
+        }
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://localhost:3000/opi/location_id",
+            "method": "POST",
+            "headers": {
+              "content-type": "application/json",
+              "authorization": "Token <%= @user.token%>",
+              "cache-control": "no-cache",
+              "postman-token": "eb51fedd-b3b0-c593-2371-6f9f6e41c9d0"
+            },
+            "processData": false,
+            "data": JSON.stringify(data)
+          }
+          
+          $.ajax(settings).done(function (response) {
+            console.log(response);
+            if(response.Success == "Hello"){
+                window.location.reload();
+            }
+          });
+                                                
+    })
     </script>
     <script>
     $( ".one" ).click(function() {

@@ -12,7 +12,21 @@ class Opi::AuthController < Opi::OpiController
             puts @time.to_date
             @user.meeting = @time.to_date
             @user.save
+            render json: {"Success": "Hello"}
         end
-        render json: {"Success": "Hello"}
+       
+    end
+
+    def meeting_location
+      location_id =   params[:location]
+      puts location_id
+        if location_id.blank?
+            puts "helllo"
+        else
+           @user = current_user
+           @user.location_id = location_id
+           @user.save 
+           render json: {"Success": "Hello"}
+        end
     end
 end
