@@ -193,3 +193,21 @@ a:hover{
     color: #444 !important;
 
 }
+.border{
+    border: 1px solid #444;
+    padding: 10px;
+}
+.base-cell{
+    padding: 0px !important;
+}
+.border:hover{
+    background: #60bd6a;
+}
+.time-slots{
+    border: 1px solid #444;
+    padding: 11px;
+    padding-left: 0px !important;
+}
+.time-slots:hover{
+    background: #60bd6a;
+}
