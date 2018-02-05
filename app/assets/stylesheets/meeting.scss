@@ -17,6 +17,7 @@ margin-top: 10px;
     margin-top: 10px;
     border: 1px solid #f4f4f4 !important;
     padding: 10px;
+    list-style-type: none;
 }
 .one{
     border: 1px solid;
@@ -35,13 +36,13 @@ margin-top: 10px;
     padding: 0px !important;
 }
 .one:hover{
-    background: #60bd6a
+    background: #44a1c2
 }
 .two:hover{
-    background: #60bd6a
+    background: #44a1c2
 }
 .highlight{
-    background: #60bd6a
+    background: #44a1c2
 }
 #taken{
     border: 1px solid;
@@ -56,7 +57,7 @@ margin-top: 10px;
 #selected{
     border: 1px solid;
     padding: 11px;
-    background: #60bd6a;
+    background: #44a1c2;
 }
 .slots-avilable{
     padding: 10px;
@@ -116,7 +117,11 @@ margin-top: 10px;
     .select_seats_meeting{
         width: 100% !important;
     }
-    
+    .dropdown{
+    }
+    .user-name{
+        display: none;
+    }
 }
 @media only screen and (max-width: 712px) {
     .right-col{
@@ -145,7 +150,7 @@ margin-top: 10px;
 .select_item{
     position: relative;
     padding: 10px !important;
-    border-right: 5px solid #60BD6A;
+    border-right: 5px solid #44a1c2;
     text-shadow: rgba(0,0,0,0.25) 0 -1px 0;
     background: linear-gradient(#262626, #262622),#2A3F54;
     box-shadow: rgba(0,0,0,0.25) 0 1px 0, inset rgba(255,255,255,0.16) 0 1px 0;
@@ -174,17 +179,20 @@ a:hover{
     margin-top: 10px;
     margin-bottom: 40px;
     padding: 6px;
-    background: #60bd6a;
-    border: 1px solid #60bd6a;
+    background: #44a1c2;
+    border: 1px solid #44a1c2;
     color: #fff;
     border-radius: 4px;
 }
 .location-button{
-    border: 1px solid #444 !important;
+    border:2px solid #44a1c2 !important;
     border-radius: 17px !important;
     padding: 8px !important;
     padding-left: 30px !important;
     padding-right: 30px !important;
+}
+.location{
+    list-style-type: none;
 }
 .locations_name{
     color: #444 !important;
@@ -201,7 +209,7 @@ a:hover{
     padding: 0px !important;
 }
 .border:hover{
-    background: #60bd6a;
+    background: #44a1c2;
 }
 .time-slots{
     border: 1px solid #444;
@@ -209,5 +217,27 @@ a:hover{
     padding-left: 0px !important;
 }
 .time-slots:hover{
-    background: #60bd6a;
+    background: #44a1c2;
+}
+.marker{
+    color: #44a1c2;
+    margin-left: 23px;
+}
+.icon-user{
+    position: relative;
+    top: 6px;
+}
+.current-user-name{
+    padding: 8px;
+    float: right;
+}
+.menu-nav-bar{
+    float: right;
+    width: 88%;
+}
+#error{  border: 1px solid #ed5a5a;
+padding: 4px;
+background: #ed5a5a;
+border-radius: 6px;
+color: #facdcd;
 }
