@@ -7,9 +7,9 @@
             <%= render partial: "layouts/left_col", :locals => {select_item: "Profile"} %>
             <div class="col-md-11 col-sm-11 col-xs-10" style=" overflow: hidden;">
                 <div class="right-col">
-                    <div class="row navi-bar">
+                    <div class="row navi-bar" style="height: 72px;">
                         <div class="bar">
-                            <div class="row menu-nav-bar">
+                            <div class="row menu-nav-bar" style="margin-top: 5px;margin-bottom: 15px;">
                                 <%= link_to logout_path,class:"logout-button"  do %>
                                     <i class="fas fa-power-off"></i>
                                     Logout
@@ -68,7 +68,7 @@
                                             <div class="row">
                                                 <div class="submit">
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <div class="updateUserProfilr">
+                                                        <div class="">
                                                             <%= f.submit "Update", class:"profile-submit",id:"updatePassword" %>
                                                         </div>    
                                                     </div>  

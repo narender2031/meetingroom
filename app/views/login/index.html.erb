@@ -5,14 +5,14 @@
     <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-1">
         </div>
-            <div class="col-md-8 col-sm-8 col-xs-10 login-card">
+            <div class="col-md-8 col-sm-8 col-xs-10" id="login-box" style="    margin-top: 10% !important;border-radius: 4px !important;padding: 20px !important; background: #fff;">
                 <div class="row">
                     <div class="col-md-6  login-card-image">
                         <center style="margin-top: 50px;">
                             <%= image_tag "img-01.png", class:"meeting-room-login-image" %>
                         </center>    
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12 login-details">
+                    <div class="col-md-6 col-sm-12 col-xs-12 login-details" style="padding: 50px;">
                         <center>
                             <div class="row">
                                 <h4><strong>Memeber Login</strong></h4>
@@ -21,10 +21,10 @@
                                 <%= form_tag login_path do %>
                                     <fieldset>
                                         <div class="row">
-                                            <%= text_field_tag :email, params[:email], placeholder:"Email", :autocompelete => :off, class:"input-fields-login"%>
+                                            <%= text_field_tag :email, params[:email], placeholder:"Email", :autocompelete => :off, class:"input-fields-login", style:"font-family: Poppins-Medium;font-size: 15px;border: 1px solid #e6e6e6;color: #666666;border-radius: 25px;display: block; margin-top: 20px;padding: 0 30px 0 68px;height: 50px;background: #e6e6e6;"%>
                                         </div>
                                         <div class="row">
-                                            <%= password_field_tag :password, params[:password], placeholder: "Password", class:"input-fields-login"%>
+                                            <%= password_field_tag :password, params[:password], placeholder: "Password", class:"input-fields-login", style:"font-family: Poppins-Medium;font-size: 15px;border: 1px solid #e6e6e6;color: #666666;border-radius: 25px;display: block; margin-top: 20px;padding: 0 30px 0 68px;height: 50px;background: #e6e6e6;"%>
                                         </div>
                                         <div class="row"> 
                                             <%= submit_tag "Log In", class:"login-button"%>
