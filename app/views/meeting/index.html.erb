@@ -4,24 +4,7 @@
 <body>    
     <div class="row">
         <div class="row">
-            <div class="col-md-1 col-sm-1 col-xs-2">
-                <div class="left-col">
-                    <div class="brand-logo">
-                        <center>
-                            <%= image_tag "brand.png", class:"", style:"width: 84%;"%>
-                        </center>    
-                    </div>
-                    <div class="menu">
-                        <ul>
-                            <li class="select_item">
-                                <%= link_to meeting_path,class:"menu-coloum" do %>
-                                    <i class="fas fa-users"></i> Meeting 
-                                <% end %>
-                            </li>
-                        </ul>
-                    </div>    
-                </div>
-            </div>
+            <%= render partial: "layouts/left_col", :locals => {select_item: "Meeting"} %>
             <div class="col-md-11 col-sm-11 col-xs-10" style=" overflow: hidden;">
                 <div class="right-col">
                     <div class="row navi-bar">
@@ -328,35 +311,35 @@
     });
     </script>
     <script>
-    $(".location").click(function(){
-        var location_id = ($(this).attr('data'))
-        console.log(location_id);
-        var data = {
-            location: location_id
-        }
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "http://localhost:3000/opi/location_id",
-            "method": "POST",
-            "headers": {
-              "content-type": "application/json",
-              "authorization": "Token <%= @user.token%>",
-              "cache-control": "no-cache",
-              "postman-token": "eb51fedd-b3b0-c593-2371-6f9f6e41c9d0"
-            },
-            "processData": false,
-            "data": JSON.stringify(data)
-          }
-          
-          $.ajax(settings).done(function (response) {
-            console.log(response);
-            if(response.Success == "Hello"){
-                window.location.reload();
+        $(".location").click(function(){
+            var location_id = ($(this).attr('data'))
+            console.log(location_id);
+            var data = {
+                location: location_id
             }
-          });
-                                                
-    })
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "http://localhost:3000/opi/location_id",
+                "method": "POST",
+                "headers": {
+                "content-type": "application/json",
+                "authorization": "Token <%= @user.token%>",
+                "cache-control": "no-cache",
+                "postman-token": "eb51fedd-b3b0-c593-2371-6f9f6e41c9d0"
+                },
+                "processData": false,
+                "data": JSON.stringify(data)
+            }
+            
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                if(response.Success == "Hello"){
+                    window.location.reload();
+                }
+            });
+                                                    
+        })
     </script>
     <script>
        $('.time-slots').on('click', function(e){
@@ -524,499 +507,499 @@
         }
        })
     </script>
-   <script>
-    $('#something_selcted').on('change', function(e) {
-          $('#duration').val(this.value);
-         var meeting_duration  = this.value
-         var time_slot =  $('#time_meeting').val();
-         if(time_slot == 9 || time_slot == 10 || time_slot == 11 || time_slot == 12 || time_slot == 1 || time_slot == 2 || time_slot == 3 || time_slot == 4 || time_slot == 5 || time_slot == 6 || time_slot == 7 || time_slot == 8){
-             if(meeting_duration == 1){
-                 $('.highlight').next().addClass("highlight")
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().removeClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }
-             else if (meeting_duration == 1.30){
-                 $('.highlight').next().addClass("highlight")
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }
-             else if(meeting_duration == 2){
-                 $('.highlight').next().addClass("highlight")
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }
-             else if(meeting_duration == 2.30){
-                 $('.highlight').next().addClass("highlight")
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }
-             else if(meeting_duration == 3){
-                 $('.highlight').next().addClass("highlight")
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }
-             else if(meeting_duration == 3.30){
-                 $('.highlight').next().addClass("highlight")
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }
-             else if(meeting_duration == 4){
-                 $('.highlight').next().addClass("highlight")
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }
-             else if(meeting_duration == 4.30){
-                 $('.highlight').next().addClass("highlight")
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }
-             else if(meeting_duration == 5){
-                 $('.highlight').next().addClass("highlight")
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 
-             }
-             else if(meeting_duration == 5.30){
-                 $('.highlight').next().addClass("highlight")
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-             }
-             else if(meeting_duration == 6){
-                 $('.highlight').next().addClass("highlight");
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-             }
-             else if(meeting_duration == 30){
-                 $('.highlight').parent('.time-border').next().children().next().next().removeClass("highlight");
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight')
-                 $('.highlight').next().removeClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().removeClass('highlight');
-             }
-         }
-         else if(time_slot == 9.30 || time_slot == 10.30 || time_slot == 11.30 || time_slot == 12.30 || time_slot == 1.30 || time_slot == 2.30 || time_slot == 3.30 || time_slot == 4.30 || time_slot == 5.30 || time_slot == 6.30 || time_slot == 7.30 || time_slot == 8.30){
-             if(meeting_duration == 1){
-                 console.log("gello")
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }else if(meeting_duration == 1.30){
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             } else if(meeting_duration == 2){
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             } else if(meeting_duration == 2.30){
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             } else if(meeting_duration == 3){
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }else if(meeting_duration == 3.30){
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }else if(meeting_duration == 4){
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }else if(meeting_duration == 4.30){
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }else if(meeting_duration == 5){
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }else if(meeting_duration == 5.30){
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
-             }else if(meeting_duration == 6){
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
-                 $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
-                 $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
-             } else if(meeting_duration == 30){
-                 $('.highlight').parent('.time-border').next().children().next().next().removeClass("highlight");
-                 $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight')
-             }
-             
-        }  
-       })
-   </script>
+    <script>
+            $('#something_selcted').on('change', function(e) {
+                $('#duration').val(this.value);
+                var meeting_duration  = this.value
+                var time_slot =  $('#time_meeting').val();
+                if(time_slot == 9 || time_slot == 10 || time_slot == 11 || time_slot == 12 || time_slot == 1 || time_slot == 2 || time_slot == 3 || time_slot == 4 || time_slot == 5 || time_slot == 6 || time_slot == 7 || time_slot == 8){
+                    if(meeting_duration == 1){
+                        $('.highlight').next().addClass("highlight")
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().removeClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }
+                    else if (meeting_duration == 1.30){
+                        $('.highlight').next().addClass("highlight")
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }
+                    else if(meeting_duration == 2){
+                        $('.highlight').next().addClass("highlight")
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }
+                    else if(meeting_duration == 2.30){
+                        $('.highlight').next().addClass("highlight")
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }
+                    else if(meeting_duration == 3){
+                        $('.highlight').next().addClass("highlight")
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }
+                    else if(meeting_duration == 3.30){
+                        $('.highlight').next().addClass("highlight")
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }
+                    else if(meeting_duration == 4){
+                        $('.highlight').next().addClass("highlight")
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }
+                    else if(meeting_duration == 4.30){
+                        $('.highlight').next().addClass("highlight")
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }
+                    else if(meeting_duration == 5){
+                        $('.highlight').next().addClass("highlight")
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        
+                    }
+                    else if(meeting_duration == 5.30){
+                        $('.highlight').next().addClass("highlight")
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                    }
+                    else if(meeting_duration == 6){
+                        $('.highlight').next().addClass("highlight");
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                    }
+                    else if(meeting_duration == 30){
+                        $('.highlight').parent('.time-border').next().children().next().next().removeClass("highlight");
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight')
+                        $('.highlight').next().removeClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().removeClass('highlight');
+                    }
+                }
+                else if(time_slot == 9.30 || time_slot == 10.30 || time_slot == 11.30 || time_slot == 12.30 || time_slot == 1.30 || time_slot == 2.30 || time_slot == 3.30 || time_slot == 4.30 || time_slot == 5.30 || time_slot == 6.30 || time_slot == 7.30 || time_slot == 8.30){
+                    if(meeting_duration == 1){
+                        console.log("gello")
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }else if(meeting_duration == 1.30){
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    } else if(meeting_duration == 2){
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    } else if(meeting_duration == 2.30){
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    } else if(meeting_duration == 3){
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }else if(meeting_duration == 3.30){
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }else if(meeting_duration == 4){
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }else if(meeting_duration == 4.30){
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }else if(meeting_duration == 5){
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().removeClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }else if(meeting_duration == 5.30){
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().removeClass('highlight');
+                    }else if(meeting_duration == 6){
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().addClass('highlight')
+                        $('.highlight').parent('.time-border').next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().addClass('highlight');
+                        $('.highlight').parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().addClass('highlight');
+                    } else if(meeting_duration == 30){
+                        $('.highlight').parent('.time-border').next().children().next().next().removeClass("highlight");
+                        $('.highlight').parent('.time-border').next().next().children().next('.time-slots').first().removeClass('highlight')
+                    }
+                    
+                }  
+            })
+    </script>
 
-   <script>
-   var d = new Date();
-   time = d.getHours();
-   minute = d.getMinutes();
-   console.log(time+"."+minute)
-   var time_min = time+"."+minute
-   var today_time = d.getDate();
-   console.log("manu "+today_time);
-   <% @tiwe = Time.now %>
-   <% if @tiwe.to_date == @user.meeting.to_date %>
-       if (time_min > 9){
-           $('.nine').css('pointerEvents','none')
-           $('.nine').css("background","gray");
-       }
-       if(time_min > 9.30){
-           $('.nine_thirty').css('pointerEvents','none')
-           $('.nine_thirty').css("background","gray");
-       }
-       if(time_min > 10){
-           $('.ten').css('pointerEvents','none')
-           $('.ten').css("background","gray");
-       }
-       if(time_min > 10.30){
-           $('.ten_thirty').css('pointerEvents','none')
-           $('.ten_thirty').css("background","gray");
-       }
-       if(time_min > 11){
-           $('.elevan').css('pointerEvents','none')
-           $('.elevan').css("background","gray");
-       }
-       if(time_min > 11.30){
-           $('.elevan_thirty').css('pointerEvents','none')
-           $('.elevan_thirty').css("background","gray");
-       }
-       if(time_min > 12){
-           $('.twelve').css('pointerEvents','none')
-           $('.twelve').css("background","gray");
-       }
-       if(time_min > 12.30){
-           $('.twelve_thirty').css('pointerEvents','none')
-           $('.twelve_thirty').css("background","gray");
-       }
-       if(time_min > 13){
-           $('.one').css('pointerEvents','none')
-           $('.one').css("background","gray");
-       }
-       if(time_min > 13.30){
-           $('.one_thirty').css('pointerEvents','none')
-           $('.one_thirty').css("background","gray");
-       }
-       if(time_min > 14){
-           $('.two').css('pointerEvents','none')
-           $('.two').css("background","gray");
-       }
-       if(time_min > 14.30){
-           $('.two_thirty').css('pointerEvents','none')
-           $('.two_thirty').css("background","gray");
-       }
-       if(time_min > 15){
-           $('.three').css('pointerEvents','none')
-           $('.three').css("background","gray");
-           $('#something_selcted #threesixty_minute').css("display","none");
-       }
-       if(time_min > 15.30){
-           $('.three_thirty').css('pointerEvents','none')
-           $('.three_thirty').css("background","gray");
-           $('#something_selcted #threethirty_minute').css("display","none");
-           $('#something_selcted #threesixty_minute').css("display","none");
-       }
-       if(time_min > 16){
-           $('.four').css('pointerEvents','none')
-           $('.four').css("background","gray");
-           $('#something_selcted #threethirty_minute').css("display","none");
-           $('#something_selcted #threesixty_minute').css("display","none");
-           $('#something_selcted #threehund_minute').css("display","none");
-       }
-       if(time_min > 16.30){
-           $('.four_thirty').css('pointerEvents','none')
-           $('.four_thirty').css("background","gray");
-           $('#something_selcted #threethirty_minute').css("display","none");
-           $('#something_selcted #threesixty_minute').css("display","none");
-           $('#something_selcted #threehund_minute').css("display","none");
-           $('#something_selcted #twoseventy_minute').css("display","none");
-       
-       }
-       if(time_min > 17){
-           $('.five').css('pointerEvents','none')
-           $('.five').css("background","gray");
-           $('#something_selcted #threethirty_minute').css("display","none");
-           $('#something_selcted #threesixty_minute').css("display","none");
-           $('#something_selcted #threehund_minute').css("display","none");
-           $('#something_selcted #twoseventy_minute').css("display","none");
-           $('#something_selcted #twofourty_minute').css("display","none");
-       }
-       if(time_min > 17.30){
-           $('.five_thirty').css('pointerEvents','none')
-           $('.five_thirty').css("background","gray");
-           $('#something_selcted #threethirty_minute').css("display","none");
-           $('#something_selcted #threesixty_minute').css("display","none");
-           $('#something_selcted #threehund_minute').css("display","none");
-           $('#something_selcted #twoseventy_minute').css("display","none");
-           $('#something_selcted #twofourty_minute').css("display","none");
-           $('#something_selcted #twoten_minute').css("display","none");
-       }
-       if(time_min > 18){
-           $('.six').css('pointerEvents','none')
-           $('.six').css("background","gray");
-           $('#something_selcted #threethirty_minute').css("display","none");
-           $('#something_selcted #threesixty_minute').css("display","none");
-           $('#something_selcted #threehund_minute').css("display","none");
-           $('#something_selcted #twoseventy_minute').css("display","none");
-           $('#something_selcted #twofourty_minute').css("display","none");
-           $('#something_selcted #twoten_minute').css("display","none");
-           $('#something_selcted #onefifty_minute').css("display","none");
-           
-       }
-       if(time_min > 18.30){
-           $('.six_thirty').css('pointerEvents','none')
-           $('.six_thirty').css("background","gray");
-           $('#something_selcted #threethirty_minute').css("display","none");
-           $('#something_selcted #threesixty_minute').css("display","none");
-           $('#something_selcted #threehund_minute').css("display","none");
-           $('#something_selcted #twoseventy_minute').css("display","none");
-           $('#something_selcted #twofourty_minute').css("display","none");
-           $('#something_selcted #twoten_minute').css("display","none");
-           $('#something_selcted #onefifty_minute').css("display","none");
-           $('#something_selcted #oneeighty_minute').css("display","none");
-       }
-       if(time_min > 19){
-           $('.seven').css('pointerEvents','none')
-           $('.seven').css("background","gray");
-           $('#something_selcted #threethirty_minute').css("display","none");
-           $('#something_selcted #threesixty_minute').css("display","none");
-           $('#something_selcted #threehund_minute').css("display","none");
-           $('#something_selcted #twoseventy_minute').css("display","none");
-           $('#something_selcted #twofourty_minute').css("display","none");
-           $('#something_selcted #twoten_minute').css("display","none");
-           $('#something_selcted #onefifty_minute').css("display","none");
-           $('#something_selcted #oneeighty_minute').css("display","none");
-           $('#something_selcted #onetwenty_minute').css("display","none");
-       }
-       if(time_min > 19.30){
-           $('.seven_thirty').css('pointerEvents','none')
-           $('.seven_thirty').css("background","gray");
-           $('#something_selcted #threethirty_minute').css("display","none");
-           $('#something_selcted #threesixty_minute').css("display","none");
-           $('#something_selcted #threehund_minute').css("display","none");
-           $('#something_selcted #twoseventy_minute').css("display","none");
-           $('#something_selcted #twofourty_minute').css("display","none");
-           $('#something_selcted #twoten_minute').css("display","none");
-           $('#something_selcted #onefifty_minute').css("display","none");
-           $('#something_selcted #oneeighty_minute').css("display","none");
-           $('#something_selcted #onetwenty_minute').css("display","none");
-           $('#something_selcted #onefifty_minute').css("display","none");
-       }
-       if(time_min > 20){
-           $('.seven_thirty').css('pointerEvents','none')
-           $('.seven_thirty').css("background","gray");
-           $('.eight').css('pointerEvents','none')
-           $('.eight').css("background","gray");
-           $('#something_selcted #threethirty_minute').css("display","none");
-           $('#something_selcted #threesixty_minute').css("display","none");
-           $('#something_selcted #threehund_minute').css("display","none");
-           $('#something_selcted #twoseventy_minute').css("display","none");
-           $('#something_selcted #twofourty_minute').css("display","none");
-           $('#something_selcted #twoten_minute').css("display","none");
-           $('#something_selcted #onefifty_minute').css("display","none");
-           $('#something_selcted #oneeighty_minute').css("display","none");
-           $('#something_selcted #onetwenty_minute').css("display","none");
-           $('#something_selcted #onefifty_minute').css("display","none");
-           $('#something_selcted #ninty_minute').css("display","none"); 
-       }
-       if(time_min > 20.30){
-           $('.eight_thirty').css('pointerEvents','none')
-           $('.eight_thirty').css("background","gray");
-           $('#something_selcted #threethirty_minute').css("display","none");
-           $('#something_selcted #threesixty_minute').css("display","none");
-           $('#something_selcted #threehund_minute').css("display","none");
-           $('#something_selcted #twoseventy_minute').css("display","none");
-           $('#something_selcted #twofourty_minute').css("display","none");
-           $('#something_selcted #twoten_minute').css("display","none");
-           $('#something_selcted #onefifty_minute').css("display","none");
-           $('#something_selcted #oneeighty_minute').css("display","none");
-           $('#something_selcted #onetwenty_minute').css("display","none");
-           $('#something_selcted #onefifty_minute').css("display","none");
-           $('#something_selcted #onefifty_minute').css("display","none");
-           $('#something_selcted #sixty_minute').css("display","none");  
-       }
-   <% end %>
-   console.log(time);
-</script>
+    <script>
+    var d = new Date();
+    time = d.getHours();
+    minute = d.getMinutes();
+    console.log(time+"."+minute)
+    var time_min = time+"."+minute
+    var today_time = d.getDate();
+    console.log("manu "+today_time);
+    <% @tiwe = Time.now %>
+    <% if @tiwe.to_date == @user.meeting.to_date %>
+        if (time_min > 9){
+            $('.nine').css('pointerEvents','none')
+            $('.nine').css("background","gray");
+        }
+        if(time_min > 9.30){
+            $('.nine_thirty').css('pointerEvents','none')
+            $('.nine_thirty').css("background","gray");
+        }
+        if(time_min > 10){
+            $('.ten').css('pointerEvents','none')
+            $('.ten').css("background","gray");
+        }
+        if(time_min > 10.30){
+            $('.ten_thirty').css('pointerEvents','none')
+            $('.ten_thirty').css("background","gray");
+        }
+        if(time_min > 11){
+            $('.elevan').css('pointerEvents','none')
+            $('.elevan').css("background","gray");
+        }
+        if(time_min > 11.30){
+            $('.elevan_thirty').css('pointerEvents','none')
+            $('.elevan_thirty').css("background","gray");
+        }
+        if(time_min > 12){
+            $('.twelve').css('pointerEvents','none')
+            $('.twelve').css("background","gray");
+        }
+        if(time_min > 12.30){
+            $('.twelve_thirty').css('pointerEvents','none')
+            $('.twelve_thirty').css("background","gray");
+        }
+        if(time_min > 13){
+            $('.one').css('pointerEvents','none')
+            $('.one').css("background","gray");
+        }
+        if(time_min > 13.30){
+            $('.one_thirty').css('pointerEvents','none')
+            $('.one_thirty').css("background","gray");
+        }
+        if(time_min > 14){
+            $('.two').css('pointerEvents','none')
+            $('.two').css("background","gray");
+        }
+        if(time_min > 14.30){
+            $('.two_thirty').css('pointerEvents','none')
+            $('.two_thirty').css("background","gray");
+        }
+        if(time_min > 15){
+            $('.three').css('pointerEvents','none')
+            $('.three').css("background","gray");
+            $('#something_selcted #threesixty_minute').css("display","none");
+        }
+        if(time_min > 15.30){
+            $('.three_thirty').css('pointerEvents','none')
+            $('.three_thirty').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+        }
+        if(time_min > 16){
+            $('.four').css('pointerEvents','none')
+            $('.four').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+        }
+        if(time_min > 16.30){
+            $('.four_thirty').css('pointerEvents','none')
+            $('.four_thirty').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+        
+        }
+        if(time_min > 17){
+            $('.five').css('pointerEvents','none')
+            $('.five').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+        }
+        if(time_min > 17.30){
+            $('.five_thirty').css('pointerEvents','none')
+            $('.five_thirty').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+        }
+        if(time_min > 18){
+            $('.six').css('pointerEvents','none')
+            $('.six').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            
+        }
+        if(time_min > 18.30){
+            $('.six_thirty').css('pointerEvents','none')
+            $('.six_thirty').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+        }
+        if(time_min > 19){
+            $('.seven').css('pointerEvents','none')
+            $('.seven').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+        }
+        if(time_min > 19.30){
+            $('.seven_thirty').css('pointerEvents','none')
+            $('.seven_thirty').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+        }
+        if(time_min > 20){
+            $('.seven_thirty').css('pointerEvents','none')
+            $('.seven_thirty').css("background","gray");
+            $('.eight').css('pointerEvents','none')
+            $('.eight').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #ninty_minute').css("display","none"); 
+        }
+        if(time_min > 20.30){
+            $('.eight_thirty').css('pointerEvents','none')
+            $('.eight_thirty').css("background","gray");
+            $('#something_selcted #threethirty_minute').css("display","none");
+            $('#something_selcted #threesixty_minute').css("display","none");
+            $('#something_selcted #threehund_minute').css("display","none");
+            $('#something_selcted #twoseventy_minute').css("display","none");
+            $('#something_selcted #twofourty_minute').css("display","none");
+            $('#something_selcted #twoten_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #oneeighty_minute').css("display","none");
+            $('#something_selcted #onetwenty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #onefifty_minute').css("display","none");
+            $('#something_selcted #sixty_minute').css("display","none");  
+        }
+    <% end %>
+    console.log(time);
+    </script>
     <script>
         <% @meeting_booked.each do |meeting| %>
             //console.log($('[id="<%= meeting.meeting_room_id %>"]'));
@@ -2615,7 +2598,4 @@
            }
         })
     </script>
-   
-    <script>
-        
-    </script>
+</body>   

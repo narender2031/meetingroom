@@ -1,0 +1,23 @@
+<div class="col-md-1 col-sm-1 col-xs-2">
+<div class="left-col">
+    <div class="brand-logo">
+        <center>
+            <%= image_tag "brand.png", class:"", style:"width: 84%;"%>
+        </center>    
+    </div>
+    <div class="menu">
+        <ul>
+            <li class="list <%= 'select_item' if select_item == 'Meeting'  %>">
+                <%= link_to meeting_path,class:"menu-coloum" do %>
+                    <i class="fas fa-users"></i> Meeting 
+                <% end %>
+            </li>
+            <li class="list <%= 'select_item' if select_item == 'Profile'  %>">
+                <%= link_to profile_path,class:"menu-coloum" do %>
+                    <i class="fas fa-user-md"></i> Profile 
+                <% end %>
+            </li>
+        </ul>
+    </div>    
+</div>
+</div>

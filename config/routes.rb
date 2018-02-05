@@ -13,4 +13,8 @@ Rails.application.routes.draw do
   get '/logout', to: "login#logout"
   get '/meeting', to: "meeting#index"
   post '/bookings', to: "meeting#create"
+  get '/profile', to:"profile#index"
+  patch '/profile', to:"profile#updateProfile"
+  get '/password', to: "profile#password"
+  patch '/password', to: "profile#updatePassword"
 end

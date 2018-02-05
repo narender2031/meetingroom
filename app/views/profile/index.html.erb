@@ -1,0 +1,130 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<body>    
+    <div class="row">
+        <div class="row">
+            <%= render partial: "layouts/left_col", :locals => {select_item: "Profile"} %>
+            <div class="col-md-11 col-sm-11 col-xs-10" style=" overflow: hidden;">
+                <div class="right-col">
+                    <div class="row navi-bar">
+                        <div class="bar">
+                            <div class="row menu-nav-bar">
+                                <%= link_to logout_path,class:"logout-button"  do %>
+                                    <i class="fas fa-power-off"></i>
+                                    Logout
+                                <% end %>
+                            </div>    
+                        </div>    
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="profile">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <%= form_for @user, url: profile_path do |f| %>
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="">
+                                                        <%= f.text_field :name, class:"profile-box", id:"username"%>
+                                                    </div>
+                                                </div>    
+                                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="error">
+                                                        <div class="name-error">
+                                                            <p id="error-name" class="error-message"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="user-email">
+                                                        <%= f.text_field :email, class:"profile-box",id:"email" %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="error">
+                                                        <div class="email-error">
+                                                            <p id="emailerror" class="error-message"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>    
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="user-phone">
+                                                        <%= f.text_field :phone, class:"profile-box",id:"userphone" %>
+                                                    </div>
+                                                </div>  
+                                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="error">
+                                                        <div class="phone-error">
+                                                            <p id="phoneerror" class="error-message"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </div>
+                                            <div class="row">
+                                                <div class="submit">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="updateUserProfilr">
+                                                            <%= f.submit "Update", class:"profile-submit",id:"updatePassword" %>
+                                                        </div>    
+                                                    </div>  
+                                                </div>    
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">  
+                                                    <div class="goToPassword">
+                                                        <%= link_to password_path,class:"" do %>
+                                                            Change Password
+                                                        <% end %>
+                                                    </div>    
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function(){
+        $('.dropdown-toggle').dropdown();
+    });
+    </script>
+    <script>
+        $('#updatePassword').on('click', function(e){
+                
+            var user =  $('#username').val();
+            if(user == ""){
+                e.preventDefault();
+                $('#error-name').css("display","block");
+                $('#error-name').text("Name is missing");
+                $("#error-name").fadeOut(4000);
+            }
+            var email = $('#email').val()
+            if(email == ""){
+                e.preventDefault();
+                $('#emailerror').css("display","block");
+                $('#emailerror').text("Your email is missing");
+                $("#emailerror").fadeOut(4000);
+
+            }
+            var phone = $('#userphone').val();
+            if(phone == ""){
+                e.preventDefault();
+                $('#phoneerror').css("display","block");                
+                $("#phoneerror").text("Phone number is missing");
+                $("#phoneerror").fadeOut(4000);
+            }
+        })
+    </script>
+</body>   
