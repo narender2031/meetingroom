@@ -7,9 +7,9 @@
             <%= render partial: "layouts/left_col", :locals => {select_item: "Profile"} %>
             <div class="col-md-11 col-sm-11 col-xs-10" style=" overflow: hidden;">
                 <div class="right-col">
-                    <div class="row navi-bar" style="height: 72px;">
+                    <div class="row navi-bar">
                         <div class="bar">
-                            <div class="row menu-nav-bar" style="margin-top: 5px;margin-bottom: 15px;">
+                            <div class="row menu-nav-bar" >
                                 <%= link_to logout_path,class:"logout-button"  do %>
                                     <i class="fas fa-power-off"></i>
                                     Logout
@@ -66,20 +66,20 @@
                                                 </div>  
                                             </div>
                                             <div class="row">
-                                                <div class="submit">
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <div class="">
-                                                            <%= f.submit "Update", class:"profile-submit",id:"updatePassword" %>
-                                                        </div>    
-                                                    </div>  
+                                                <div class="col-md-6 col-sm-6 col-xs-12"> 
+                                                    <center>
+                                                        <%= f.submit "Update", class:"profile-submit",id:"updatePassword" %>
+                                                    </center>    
                                                 </div>    
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 col-sm-6 col-xs-12">  
                                                     <div class="goToPassword">
-                                                        <%= link_to password_path,class:"" do %>
-                                                            Change Password
-                                                        <% end %>
+                                                        <center>
+                                                            <%= link_to password_path,class:"" do %>
+                                                                Change Password
+                                                            <% end %>
+                                                        </center>    
                                                     </div>    
                                                 </div>
                                             </div>
