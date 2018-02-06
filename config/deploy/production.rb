@@ -59,4 +59,5 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
-server '139.59.40.80', roles: [:web, :app, :db], primary: true
+
+server '13.126.173.85', roles: [:web, :app, :db], primary: true
