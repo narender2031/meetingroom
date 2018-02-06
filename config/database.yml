@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: meeting_production
-  username: meeting
+  username: deploy
   password: <%= ENV['MEETING_DATABASE_PASSWORD'] %>
