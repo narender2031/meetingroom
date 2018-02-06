@@ -2,6 +2,10 @@ class MeetingController < ApplicationController
     before_action :authorize
     def index
         @user = current_user
+        if @user.location_id == nil
+            @user.location_id = Location.last.id
+            @user.save
+        end
         if @user.meeting == nil
             @time_req = Time.now.to_date
             @user.meeting = @time_req
