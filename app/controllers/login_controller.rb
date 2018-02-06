@@ -22,6 +22,6 @@ class LoginController < ApplicationController
         @user.save
         session[:user_id] = nil
         cookies[:token] = nil
-        render :index
+        redirect_to login_path
     end
 end

@@ -252,3 +252,52 @@ li .menu-coloum:hover{
 .nevi-bar{
 background: #fff;
 }
+.current-user-name{
+color: #444;
+}
+.current-user-name:hover{
+    color: #444 !important;
+}
+@media only screen and (max-width: 360px) {
+
+    .left-col {
+        height: 100%;
+        width: 99px !important;
+        position: fixed;
+        background: #444;
+        z-index: 1;
+        top: 0px;
+        left: 0px;
+        overflow: hidden;
+        padding-top: 20px;
+    }
+    .right-col {
+        padding-left: 23px !important;
+    }
+    .location-button{
+        background: #fff !important;
+    }
+}
+@media only screen and (max-device-width: 732px) {
+    
+        .left-col {
+            height: 100%;
+            width: 99px !important;
+            position: fixed;
+            background: #444;
+            z-index: 1;
+            top: 0px;
+            left: 0px;
+            overflow: hidden;
+            padding-top: 20px;
+        }
+        .right-col {
+            padding-left: 23px !important;
+        }
+        .location-button{
+            background: #fff !important;
+        }
+        .login-details{
+            padding: 7px !important;
+        }
+    }
