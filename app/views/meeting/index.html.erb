@@ -43,13 +43,6 @@
                         </div>    
                     </div>
                     <div class="container">
-                        <div class="row error-container" >
-                            <center>
-                                <div class="row">
-                                    <p id="error" style="display:none"></p>
-                                </div>
-                            </center>
-                        </div>
                         <%= form_for @bookings do |f| %>
                             <fieldset>
                             <div class="row" style="padding:5px;">
@@ -300,6 +293,13 @@
                             </div>
                             </fieldset>
                         <% end %>
+                        <div class="row error-container" >
+                            <center>
+                                <div class="row">
+                                    <p id="error" style="display:none; margin-top: -28px;"></p>
+                                </div>
+                            </center>
+                        </div>
                     </div>    
                 </div>    
             </div>
@@ -322,7 +322,7 @@
             var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": "http://139.59.40.80//opi/location_id",
+                "url": "http://139.59.40.80/opi/location_id",
                 "method": "POST",
                 "headers": {
                 "content-type": "application/json",
@@ -357,156 +357,551 @@
             $('#something_selcted').css("display","block");
             $("#something_selcted").val(30);
             $('#duration').val(30);
-            if(meeting_start_at == 3.30){
-                $('#something_selcted #threesixty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','block');
-                $('#something_selcted #threethirty_minute').css('display','block');
-                $('#something_selcted #threehund_minute').css('display','none');
-                $('#something_selcted #twoseventy_minute').css('display','block');
-                $('#something_selcted #twofourty_minute').css('display','block'); 
-                $('#something_selcted #twoten_minute').css('display','block');   
-                $('#something_selcted #oneeighty_minute').css('display','block');   
-                $('#something_selcted #onefifty_minute').css('display','block');  
-                $('#something_selcted #onetwenty_minute').css('display','block');   
-                $('#something_selcted #ninty_minute').css('display','block');                        
-                $('#something_selcted #sixty_minute').css('display','block');
-            }else if(meeting_start_at == 4){
-                $('#something_selcted #threesixty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','block');
-                $('#something_selcted #threehund_minute').css('display','none');
-                $('#something_selcted #twoseventy_minute').css('display','block');
-                $('#something_selcted #twofourty_minute').css('display','block'); 
-                $('#something_selcted #twoten_minute').css('display','block');   
-                $('#something_selcted #oneeighty_minute').css('display','block');   
-                $('#something_selcted #onefifty_minute').css('display','block');  
-                $('#something_selcted #onetwenty_minute').css('display','block');   
-                $('#something_selcted #ninty_minute').css('display','block');                        
-                $('#something_selcted #sixty_minute').css('display','block');
-            }else if(meeting_start_at == 4.30){
-                $('#something_selcted #threesixty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','none');
-                $('#something_selcted #threehund_minute').css('display','none');
-                $('#something_selcted #twoseventy_minute').css('display','block');
-                $('#something_selcted #twofourty_minute').css('display','block'); 
-                $('#something_selcted #twoten_minute').css('display','block');   
-                $('#something_selcted #oneeighty_minute').css('display','block');   
-                $('#something_selcted #onefifty_minute').css('display','block');  
-                $('#something_selcted #onetwenty_minute').css('display','block');   
-                $('#something_selcted #ninty_minute').css('display','block');                        
-                $('#something_selcted #sixty_minute').css('display','block');
-            }else if(meeting_start_at == 5){
-                $('#something_selcted #threesixty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','none');
-                $('#something_selcted #threehund_minute').css('display','none');
-                $('#something_selcted #twoseventy_minute').css('display','none');
-                $('#something_selcted #twofourty_minute').css('display','block'); 
-                $('#something_selcted #twoten_minute').css('display','block');   
-                $('#something_selcted #oneeighty_minute').css('display','block');   
-                $('#something_selcted #onefifty_minute').css('display','block');  
-                $('#something_selcted #onetwenty_minute').css('display','block');   
-                $('#something_selcted #ninty_minute').css('display','block');                        
-                $('#something_selcted #sixty_minute').css('display','block');
-            } else if(meeting_start_at == 5.30){
-                $('#something_selcted #threesixty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','none');
-                $('#something_selcted #threehund_minute').css('display','none');
-                $('#something_selcted #twoseventy_minute').css('display','none');
-                $('#something_selcted #twofourty_minute').css('display','none'); 
-                $('#something_selcted #twoten_minute').css('display','block');   
-                $('#something_selcted #oneeighty_minute').css('display','block');   
-                $('#something_selcted #onefifty_minute').css('display','block');  
-                $('#something_selcted #onetwenty_minute').css('display','block');   
-                $('#something_selcted #ninty_minute').css('display','block');                        
-                $('#something_selcted #sixty_minute').css('display','block');                 
-            }else if(meeting_start_at == 6){
-                $('#something_selcted #threesixty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','none');
-                $('#something_selcted #threehund_minute').css('display','none');
-                $('#something_selcted #twoseventy_minute').css('display','none');
-                $('#something_selcted #twofourty_minute').css('display','none');   
-                $('#something_selcted #twoten_minute').css('display','none');   
-                $('#something_selcted #oneeighty_minute').css('display','block');   
-                $('#something_selcted #onefifty_minute').css('display','block');  
-                $('#something_selcted #onetwenty_minute').css('display','block');   
-                $('#something_selcted #ninty_minute').css('display','block');                        
-                $('#something_selcted #sixty_minute').css('display','block');                              
-            }else if(meeting_start_at == 6.30){
-                $('#something_selcted #threesixty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','none');
-                $('#something_selcted #threehund_minute').css('display','none');
-                $('#something_selcted #twoseventy_minute').css('display','none');
-                $('#something_selcted #twofourty_minute').css('display','none');   
-                $('#something_selcted #twoten_minute').css('display','none');   
-                $('#something_selcted #oneeighty_minute').css('display','none');   
-                $('#something_selcted #onefifty_minute').css('display','block');  
-                $('#something_selcted #onetwenty_minute').css('display','block');   
-                $('#something_selcted #ninty_minute').css('display','block');                        
-                $('#something_selcted #sixty_minute').css('display','block');                           
-            }else if(meeting_start_at == 7){
-                $('#something_selcted #threesixty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','none');
-                $('#something_selcted #threehund_minute').css('display','none');
-                $('#something_selcted #twoseventy_minute').css('display','none');
-                $('#something_selcted #twofourty_minute').css('display','none');   
-                $('#something_selcted #twoten_minute').css('display','none');   
-                $('#something_selcted #oneeighty_minute').css('display','none');        
-                $('#something_selcted #onefifty_minute').css('display','none');  
-                $('#something_selcted #onetwenty_minute').css('display','block');   
-                $('#something_selcted #ninty_minute').css('display','block');                        
-                $('#something_selcted #sixty_minute').css('display','block');                       
-            }else if(meeting_start_at == 7.30){
-                $('#something_selcted #threesixty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','none');
-                $('#something_selcted #threehund_minute').css('display','none');
-                $('#something_selcted #twoseventy_minute').css('display','none');
-                $('#something_selcted #twofourty_minute').css('display','none');   
-                $('#something_selcted #twoten_minute').css('display','none');   
-                $('#something_selcted #oneeighty_minute').css('display','none');        
-                $('#something_selcted #onefifty_minute').css('display','none');   
-                $('#something_selcted #onetwenty_minute').css('display','none');   
-                $('#something_selcted #ninty_minute').css('display','block');                        
-                $('#something_selcted #sixty_minute').css('display','block');                      
-                
-            }else if(meeting_start_at == 8){
-                $('#something_selcted #threesixty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','none');
-                $('#something_selcted #threehund_minute').css('display','none');
-                $('#something_selcted #twoseventy_minute').css('display','none');
-                $('#something_selcted #twofourty_minute').css('display','none');   
-                $('#something_selcted #twoten_minute').css('display','none');   
-                $('#something_selcted #oneeighty_minute').css('display','none');        
-                $('#something_selcted #onefifty_minute').css('display','none');
-                $('#something_selcted #onetwenty_minute').css('display','none');    
-                $('#something_selcted #ninty_minute').css('display','none');                        
-                $('#something_selcted #sixty_minute').css('display','block'); 
-            }else if(meeting_start_at == 8.30){
-                $('#something_selcted #threesixty_minute').css('display','none');
-                $('#something_selcted #threethirty_minute').css('display','none');
-                $('#something_selcted #threehund_minute').css('display','none');
-                $('#something_selcted #twoseventy_minute').css('display','none');
-                $('#something_selcted #twofourty_minute').css('display','none');   
-                $('#something_selcted #twoten_minute').css('display','none');   
-                $('#something_selcted #oneeighty_minute').css('display','none');        
-                $('#something_selcted #onefifty_minute').css('display','none'); 
-                $('#something_selcted #onetwenty_minute').css('display','none'); 
-                $('#something_selcted #ninty_minute').css('display','none');                        
-                $('#something_selcted #sixty_minute').css('display','none'); 
+            if(meeting_start_at == 9 || meeting_start_at == 10 || meeting_start_at == 11 || meeting_start_at == 12 || meeting_start_at == 1 || meeting_start_at == 2 || meeting_start_at == 3 ||meeting_start_at == 4 || meeting_start_at == 5 || meeting_start_at == 6 || meeting_start_at == 7 || meeting_start_at == 8 ){
+                var thirty_min = $(this).next('.time-slots').hasClass('disable_table'); 
+                var one_hour =  $(this).parent('.time-border').next().children().next('.time-slots').first().hasClass('disable_table');
+                var one_thirty_min =$(this).parent('.time-border').next().children().next('.time-slots').first().next().hasClass('disable_table');
+                var two_hour = $(this).parent('.time-border').next().next().children().next('.time-slots').first().hasClass('disable_table');
+                var two_thirty_min = $(this).parent('.time-border').next().next().children().next('.time-slots').first().next().hasClass('disable_table');
+                var three_hour = $(this).parent('.time-border').next().next().next().children().next('.time-slots').first().hasClass('disable_table');
+                var three_thirty_min = $(this).parent('.time-border').next().next().next().children().next('.time-slots').first().next().hasClass('disable_table');
+                var four_hour = $(this).parent('.time-border').next().next().next().next().children().next('.time-slots').first().hasClass('disable_table');
+                var four_thirty_min = $(this).parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().hasClass('disable_table');
+                var five_hour = $(this).parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().hasClass('disable_table');
+                var five_thirty_min = $(this).parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().hasClass('disable_table');
+                var six_hour = $(this).parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().hasClass('disable_table');
+                if(thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none');   
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','none');        
+                    $('#something_selcted #onefifty_minute').css('display','none'); 
+                    $('#something_selcted #onetwenty_minute').css('display','none'); 
+                    $('#something_selcted #ninty_minute').css('display','none');                        
+                    $('#something_selcted #sixty_minute').css('display','none'); 
+                } 
+                else if(one_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','none');   
+                    $('#something_selcted #onefifty_minute').css('display','none');  
+                    $('#something_selcted #onetwenty_minute').css('display','none');   
+                    $('#something_selcted #ninty_minute').css('display','none');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }  
+                else if(one_thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','none');   
+                    $('#something_selcted #onefifty_minute').css('display','none');  
+                    $('#something_selcted #onetwenty_minute').css('display','none');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else  if(two_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','none');   
+                    $('#something_selcted #onefifty_minute').css('display','none');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(two_thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','none');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(three_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(three_thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(four_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','block'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(four_thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','block');
+                    $('#something_selcted #twofourty_minute').css('display','block'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(five_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','block');
+                    $('#something_selcted #twoseventy_minute').css('display','block');
+                    $('#something_selcted #twofourty_minute').css('display','block'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(five_thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','block');
+                    $('#something_selcted #threehund_minute').css('display','block');
+                    $('#something_selcted #twoseventy_minute').css('display','block');
+                    $('#something_selcted #twofourty_minute').css('display','block'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(six_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','block');
+                    $('#something_selcted #threethirty_minute').css('display','block');
+                    $('#something_selcted #threehund_minute').css('display','block');
+                    $('#something_selcted #twoseventy_minute').css('display','block');
+                    $('#something_selcted #twofourty_minute').css('display','block'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else{
+                    if( meeting_start_at == 4){
+                        $('#something_selcted #threesixty_minute').css('display','none');
+                        $('#something_selcted #threethirty_minute').css('display','none');
+                        $('#something_selcted #threethirty_minute').css('display','block');
+                        $('#something_selcted #threehund_minute').css('display','none');
+                        $('#something_selcted #twoseventy_minute').css('display','block');
+                        $('#something_selcted #twofourty_minute').css('display','block'); 
+                        $('#something_selcted #twoten_minute').css('display','block');   
+                        $('#something_selcted #oneeighty_minute').css('display','block');   
+                        $('#something_selcted #onefifty_minute').css('display','block');  
+                        $('#something_selcted #onetwenty_minute').css('display','block');   
+                        $('#something_selcted #ninty_minute').css('display','block');                        
+                        $('#something_selcted #sixty_minute').css('display','block');
+                    }
+                    else if( meeting_start_at == 5){
+                        $('#something_selcted #threesixty_minute').css('display','none');
+                        $('#something_selcted #threethirty_minute').css('display','none');
+                        $('#something_selcted #threehund_minute').css('display','none');
+                        $('#something_selcted #twoseventy_minute').css('display','none');
+                        $('#something_selcted #twofourty_minute').css('display','block'); 
+                        $('#something_selcted #twoten_minute').css('display','block');   
+                        $('#something_selcted #oneeighty_minute').css('display','block');   
+                        $('#something_selcted #onefifty_minute').css('display','block');  
+                        $('#something_selcted #onetwenty_minute').css('display','block');   
+                        $('#something_selcted #ninty_minute').css('display','block');                        
+                        $('#something_selcted #sixty_minute').css('display','block');
+                                            
+                    }
+                    else if( meeting_start_at == 6){
+                        $('#something_selcted #threesixty_minute').css('display','none');
+                        $('#something_selcted #threethirty_minute').css('display','none');
+                        $('#something_selcted #threehund_minute').css('display','none');
+                        $('#something_selcted #twoseventy_minute').css('display','none');
+                        $('#something_selcted #twofourty_minute').css('display','none');   
+                        $('#something_selcted #twoten_minute').css('display','none');   
+                        $('#something_selcted #oneeighty_minute').css('display','block');   
+                        $('#something_selcted #onefifty_minute').css('display','block');  
+                        $('#something_selcted #onetwenty_minute').css('display','block');   
+                        $('#something_selcted #ninty_minute').css('display','block');                        
+                        $('#something_selcted #sixty_minute').css('display','block');   
+                                            
+                    }
+                    else if( meeting_start_at == 7){
+                        $('#something_selcted #threesixty_minute').css('display','none');
+                        $('#something_selcted #threethirty_minute').css('display','none');
+                        $('#something_selcted #threehund_minute').css('display','none');
+                        $('#something_selcted #twoseventy_minute').css('display','none');
+                        $('#something_selcted #twofourty_minute').css('display','none');   
+                        $('#something_selcted #twoten_minute').css('display','none');   
+                        $('#something_selcted #oneeighty_minute').css('display','none');        
+                        $('#something_selcted #onefifty_minute').css('display','none');  
+                        $('#something_selcted #onetwenty_minute').css('display','block');   
+                        $('#something_selcted #ninty_minute').css('display','block');                        
+                        $('#something_selcted #sixty_minute').css('display','block'); 
+                                            
+                    }
+                    else if( meeting_start_at == 8){
+                        $('#something_selcted #threesixty_minute').css('display','none');
+                        $('#something_selcted #threethirty_minute').css('display','none');
+                        $('#something_selcted #threehund_minute').css('display','none');
+                        $('#something_selcted #twoseventy_minute').css('display','none');
+                        $('#something_selcted #twofourty_minute').css('display','none');   
+                        $('#something_selcted #twoten_minute').css('display','none');   
+                        $('#something_selcted #oneeighty_minute').css('display','none');        
+                        $('#something_selcted #onefifty_minute').css('display','none');
+                        $('#something_selcted #onetwenty_minute').css('display','none');    
+                        $('#something_selcted #ninty_minute').css('display','none');                        
+                        $('#something_selcted #sixty_minute').css('display','block'); 
+                                            
+                    }
+                else{
+
+                        $('#something_selcted #threesixty_minute').css('display','block');
+                        $('#something_selcted #threethirty_minute').css('display','block');
+                        $('#something_selcted #threethirty_minute').css('display','block');
+                        $('#something_selcted #threehund_minute').css('display','none');
+                        $('#something_selcted #twoseventy_minute').css('display','block');
+                        $('#something_selcted #twofourty_minute').css('display','block'); 
+                        $('#something_selcted #twoten_minute').css('display','block');   
+                        $('#something_selcted #oneeighty_minute').css('display','block');   
+                        $('#something_selcted #onefifty_minute').css('display','block');  
+                        $('#something_selcted #onetwenty_minute').css('display','block');   
+                        $('#something_selcted #ninty_minute').css('display','block');                        
+                        $('#something_selcted #sixty_minute').css('display','block');
+                }
             }
-        else{
-            $('#something_selcted #threesixty_minute').css('display','block');
-            $('#something_selcted #threethirty_minute').css('display','block');
-            $('#something_selcted #threethirty_minute').css('display','block');
-            $('#something_selcted #threehund_minute').css('display','none');
-            $('#something_selcted #twoseventy_minute').css('display','block');
-            $('#something_selcted #twofourty_minute').css('display','block'); 
-            $('#something_selcted #twoten_minute').css('display','block');   
-            $('#something_selcted #oneeighty_minute').css('display','block');   
-            $('#something_selcted #onefifty_minute').css('display','block');  
-            $('#something_selcted #onetwenty_minute').css('display','block');   
-            $('#something_selcted #ninty_minute').css('display','block');                        
-            $('#something_selcted #sixty_minute').css('display','block');
-        }
+            }
+            if(meeting_start_at == 9.30 || meeting_start_at == 10.30 || meeting_start_at == 11.30 || meeting_start_at == 12.30 || meeting_start_at == 1.30 || meeting_start_at == 2.30 || meeting_start_at == 3.30 || meeting_start_at == 4.30 || meeting_start_at == 5.30 || meeting_start_at == 6.30 || meeting_start_at == 7.30 || meeting_start_at == 8.30){
+                var thirty_min =  $(this).parent('.time-border').next().children().next('.time-slots').first().hasClass('disable_table');
+                var one_hour =$(this).parent('.time-border').next().children().next('.time-slots').first().next().hasClass('disable_table');
+                var one_thirty_min = $(this).parent('.time-border').next().next().children().next('.time-slots').first().hasClass('disable_table');
+                var two_hour = $(this).parent('.time-border').next().next().children().next('.time-slots').first().next().hasClass('disable_table');
+                var two_thirty_min = $(this).parent('.time-border').next().next().next().children().next('.time-slots').first().hasClass('disable_table');
+                var three_hour = $(this).parent('.time-border').next().next().next().children().next('.time-slots').first().next().hasClass('disable_table');
+                var three_thirty_min = $(this).parent('.time-border').next().next().next().next().children().next('.time-slots').first().hasClass('disable_table');
+                var four_hour  = $(this).parent('.time-border').next().next().next().next().children().next('.time-slots').first().next().hasClass('disable_table');
+                var four_thirty_min  = $(this).parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().hasClass('disable_table');
+                var five_hour = $(this).parent('.time-border').next().next().next().next().next().children().next('.time-slots').first().next().hasClass('disable_table');
+                var five_thirty_min = $(this).parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().hasClass('disable_table');
+                var six_hour = $(this).parent('.time-border').next().next().next().next().next().next().children().next('.time-slots').first().next().hasClass('disable_table');
+                if(thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none');   
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','none');        
+                    $('#something_selcted #onefifty_minute').css('display','none'); 
+                    $('#something_selcted #onetwenty_minute').css('display','none'); 
+                    $('#something_selcted #ninty_minute').css('display','none');                        
+                    $('#something_selcted #sixty_minute').css('display','none'); 
+                } 
+                else if(one_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','none');   
+                    $('#something_selcted #onefifty_minute').css('display','none');  
+                    $('#something_selcted #onetwenty_minute').css('display','none');   
+                    $('#something_selcted #ninty_minute').css('display','none');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }  
+                else if(one_thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','none');   
+                    $('#something_selcted #onefifty_minute').css('display','none');  
+                    $('#something_selcted #onetwenty_minute').css('display','none');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else  if(two_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','none');   
+                    $('#something_selcted #onefifty_minute').css('display','none');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(two_thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','none');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(three_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','none');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(three_thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','none'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(four_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','none');
+                    $('#something_selcted #twofourty_minute').css('display','block'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(four_thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','none');
+                    $('#something_selcted #twoseventy_minute').css('display','block');
+                    $('#something_selcted #twofourty_minute').css('display','block'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(five_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threehund_minute').css('display','block');
+                    $('#something_selcted #twoseventy_minute').css('display','block');
+                    $('#something_selcted #twofourty_minute').css('display','block'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(five_thirty_min == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','block');
+                    $('#something_selcted #threehund_minute').css('display','block');
+                    $('#something_selcted #twoseventy_minute').css('display','block');
+                    $('#something_selcted #twofourty_minute').css('display','block'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else if(six_hour == true){
+                    $('#something_selcted #threesixty_minute').css('display','none');
+                    $('#something_selcted #threethirty_minute').css('display','block');
+                    $('#something_selcted #threethirty_minute').css('display','block');
+                    $('#something_selcted #threehund_minute').css('display','block');
+                    $('#something_selcted #twoseventy_minute').css('display','block');
+                    $('#something_selcted #twofourty_minute').css('display','block'); 
+                    $('#something_selcted #twoten_minute').css('display','block');   
+                    $('#something_selcted #oneeighty_minute').css('display','block');   
+                    $('#something_selcted #onefifty_minute').css('display','block');  
+                    $('#something_selcted #onetwenty_minute').css('display','block');   
+                    $('#something_selcted #ninty_minute').css('display','block');                        
+                    $('#something_selcted #sixty_minute').css('display','block');
+                }
+                else{
+                        if(meeting_start_at == 3.30){
+                            $('#something_selcted #threesixty_minute').css('display','none');
+                            $('#something_selcted #threethirty_minute').css('display','block');
+                            $('#something_selcted #threethirty_minute').css('display','block');
+                            $('#something_selcted #threehund_minute').css('display','none');
+                            $('#something_selcted #twoseventy_minute').css('display','block');
+                            $('#something_selcted #twofourty_minute').css('display','block'); 
+                            $('#something_selcted #twoten_minute').css('display','block');   
+                            $('#something_selcted #oneeighty_minute').css('display','block');   
+                            $('#something_selcted #onefifty_minute').css('display','block');  
+                            $('#something_selcted #onetwenty_minute').css('display','block');   
+                            $('#something_selcted #ninty_minute').css('display','block');                        
+                            $('#something_selcted #sixty_minute').css('display','block');
+                        } 
+                        else if(meeting_start_at == 4.30){
+                            alert("hello")
+                            $('#something_selcted #threesixty_minute').css('display','none');
+                            $('#something_selcted #threethirty_minute').css('display','none');
+                            $('#something_selcted #threehund_minute').css('display','none');
+                            $('#something_selcted #twoseventy_minute').css('display','block');
+                            $('#something_selcted #twofourty_minute').css('display','block'); 
+                            $('#something_selcted #twoten_minute').css('display','block');   
+                            $('#something_selcted #oneeighty_minute').css('display','block');   
+                            $('#something_selcted #onefifty_minute').css('display','block');  
+                            $('#something_selcted #onetwenty_minute').css('display','block');   
+                            $('#something_selcted #ninty_minute').css('display','block');                        
+                            $('#something_selcted #sixty_minute').css('display','block');
+                        }
+                        else if(meeting_start_at == 5.30){
+                            $('#something_selcted #threesixty_minute').css('display','none');
+                            $('#something_selcted #threethirty_minute').css('display','none');
+                            $('#something_selcted #threehund_minute').css('display','none');
+                            $('#something_selcted #twoseventy_minute').css('display','none');
+                            $('#something_selcted #twofourty_minute').css('display','none'); 
+                            $('#something_selcted #twoten_minute').css('display','block');   
+                            $('#something_selcted #oneeighty_minute').css('display','block');   
+                            $('#something_selcted #onefifty_minute').css('display','block');  
+                            $('#something_selcted #onetwenty_minute').css('display','block');   
+                            $('#something_selcted #ninty_minute').css('display','block');                        
+                            $('#something_selcted #sixty_minute').css('display','block');    
+                        }
+                        else if(meeting_start_at == 6.30){
+                            $('#something_selcted #threesixty_minute').css('display','none');
+                            $('#something_selcted #threethirty_minute').css('display','none');
+                            $('#something_selcted #threehund_minute').css('display','none');
+                            $('#something_selcted #twoseventy_minute').css('display','none');
+                            $('#something_selcted #twofourty_minute').css('display','none');   
+                            $('#something_selcted #twoten_minute').css('display','none');   
+                            $('#something_selcted #oneeighty_minute').css('display','none');   
+                            $('#something_selcted #onefifty_minute').css('display','block');  
+                            $('#something_selcted #onetwenty_minute').css('display','block');   
+                            $('#something_selcted #ninty_minute').css('display','block');                        
+                            $('#something_selcted #sixty_minute').css('display','block');    
+                        }
+                        else if(meeting_start_at == 7.30){
+                            $('#something_selcted #threesixty_minute').css('display','none');
+                            $('#something_selcted #threethirty_minute').css('display','none');
+                            $('#something_selcted #threehund_minute').css('display','none');
+                            $('#something_selcted #twoseventy_minute').css('display','none');
+                            $('#something_selcted #twofourty_minute').css('display','none');   
+                            $('#something_selcted #twoten_minute').css('display','none');   
+                            $('#something_selcted #oneeighty_minute').css('display','none');        
+                            $('#something_selcted #onefifty_minute').css('display','none');   
+                            $('#something_selcted #onetwenty_minute').css('display','none');   
+                            $('#something_selcted #ninty_minute').css('display','block');                        
+                            $('#something_selcted #sixty_minute').css('display','block');     
+                        }
+                        else if(meeting_start_at == 8.30){
+                            $('#something_selcted #threesixty_minute').css('display','none');
+                            $('#something_selcted #threethirty_minute').css('display','none');
+                            $('#something_selcted #threehund_minute').css('display','none');
+                            $('#something_selcted #twoseventy_minute').css('display','none');
+                            $('#something_selcted #twofourty_minute').css('display','none');   
+                            $('#something_selcted #twoten_minute').css('display','none');   
+                            $('#something_selcted #oneeighty_minute').css('display','none');        
+                            $('#something_selcted #onefifty_minute').css('display','none'); 
+                            $('#something_selcted #onetwenty_minute').css('display','none'); 
+                            $('#something_selcted #ninty_minute').css('display','none');                        
+                            $('#something_selcted #sixty_minute').css('display','none');     
+                        }
+                    else{
+                        $('#something_selcted #threesixty_minute').css('display','block');
+                        $('#something_selcted #threethirty_minute').css('display','block');
+                        $('#something_selcted #threehund_minute').css('display','block');
+                        $('#something_selcted #twoseventy_minute').css('display','block');
+                        $('#something_selcted #twofourty_minute').css('display','block');   
+                        $('#something_selcted #twoten_minute').css('display','block');   
+                        $('#something_selcted #oneeighty_minute').css('display','block');        
+                        $('#something_selcted #onefifty_minute').css('display','block'); 
+                        $('#something_selcted #onetwenty_minute').css('display','block'); 
+                        $('#something_selcted #ninty_minute').css('display','block');                        
+                        $('#something_selcted #sixty_minute').css('display','block'); 
+                    }
+                }
+            }
+            
        })
     </script>
     <script>
@@ -825,7 +1220,7 @@
             $('.nine').css('pointerEvents','none')
             $('.nine').css("background","gray");
         }
-        if(time_min > 9.30){
+        if(time_min > 9.31){
             $('.nine_thirty').css('pointerEvents','none')
             $('.nine_thirty').css("background","gray");
         }
@@ -833,7 +1228,7 @@
             $('.ten').css('pointerEvents','none')
             $('.ten').css("background","gray");
         }
-        if(time_min > 10.30){
+        if(time_min > 10.31){
             $('.ten_thirty').css('pointerEvents','none')
             $('.ten_thirty').css("background","gray");
         }
@@ -841,7 +1236,7 @@
             $('.elevan').css('pointerEvents','none')
             $('.elevan').css("background","gray");
         }
-        if(time_min > 11.30){
+        if(time_min > 11.31){
             $('.elevan_thirty').css('pointerEvents','none')
             $('.elevan_thirty').css("background","gray");
         }
@@ -849,7 +1244,7 @@
             $('.twelve').css('pointerEvents','none')
             $('.twelve').css("background","gray");
         }
-        if(time_min > 12.30){
+        if(time_min > 12.31){
             $('.twelve_thirty').css('pointerEvents','none')
             $('.twelve_thirty').css("background","gray");
         }
@@ -857,7 +1252,7 @@
             $('.one').css('pointerEvents','none')
             $('.one').css("background","gray");
         }
-        if(time_min > 13.30){
+        if(time_min > 13.31){
             $('.one_thirty').css('pointerEvents','none')
             $('.one_thirty').css("background","gray");
         }
@@ -865,7 +1260,7 @@
             $('.two').css('pointerEvents','none')
             $('.two').css("background","gray");
         }
-        if(time_min > 14.30){
+        if(time_min > 14.31){
             $('.two_thirty').css('pointerEvents','none')
             $('.two_thirty').css("background","gray");
         }
@@ -874,7 +1269,7 @@
             $('.three').css("background","gray");
             $('#something_selcted #threesixty_minute').css("display","none");
         }
-        if(time_min > 15.30){
+        if(time_min > 15.31){
             $('.three_thirty').css('pointerEvents','none')
             $('.three_thirty').css("background","gray");
             $('#something_selcted #threethirty_minute').css("display","none");
@@ -887,7 +1282,7 @@
             $('#something_selcted #threesixty_minute').css("display","none");
             $('#something_selcted #threehund_minute').css("display","none");
         }
-        if(time_min > 16.30){
+        if(time_min > 16.31){
             $('.four_thirty').css('pointerEvents','none')
             $('.four_thirty').css("background","gray");
             $('#something_selcted #threethirty_minute').css("display","none");
@@ -905,7 +1300,7 @@
             $('#something_selcted #twoseventy_minute').css("display","none");
             $('#something_selcted #twofourty_minute').css("display","none");
         }
-        if(time_min > 17.30){
+        if(time_min > 17.31){
             $('.five_thirty').css('pointerEvents','none')
             $('.five_thirty').css("background","gray");
             $('#something_selcted #threethirty_minute').css("display","none");
@@ -927,7 +1322,7 @@
             $('#something_selcted #onefifty_minute').css("display","none");
             
         }
-        if(time_min > 18.30){
+        if(time_min > 18.31){
             $('.six_thirty').css('pointerEvents','none')
             $('.six_thirty').css("background","gray");
             $('#something_selcted #threethirty_minute').css("display","none");
@@ -952,7 +1347,7 @@
             $('#something_selcted #oneeighty_minute').css("display","none");
             $('#something_selcted #onetwenty_minute').css("display","none");
         }
-        if(time_min > 19.30){
+        if(time_min > 19.31){
             $('.seven_thirty').css('pointerEvents','none')
             $('.seven_thirty').css("background","gray");
             $('#something_selcted #threethirty_minute').css("display","none");
@@ -983,7 +1378,7 @@
             $('#something_selcted #onefifty_minute').css("display","none");
             $('#something_selcted #ninty_minute').css("display","none"); 
         }
-        if(time_min > 20.30){
+        if(time_min > 20.31){
             $('.eight_thirty').css('pointerEvents','none')
             $('.eight_thirty').css("background","gray");
             $('#something_selcted #threethirty_minute').css("display","none");
