@@ -77,7 +77,7 @@
                                                         var settings = {
                                                         "async": true,
                                                         "crossDomain": true,
-                                                        "url": "http://139.59.40.80/opi/auth",
+                                                        "url": "http://localhost:3000/opi/auth",
                                                         "method": "POST",
                                                         "headers": {
                                                             "authorization": "Token <%= @user.token%>",
@@ -322,7 +322,7 @@
             var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": "http://139.59.40.80/opi/location_id",
+                "url": "http://localhost:3000/opi/location_id",
                 "method": "POST",
                 "headers": {
                 "content-type": "application/json",

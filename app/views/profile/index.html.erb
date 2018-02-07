@@ -20,6 +20,13 @@
                     </div>
                     <div class="container">
                         <div class="row">
+                        <% flash.each do |name, msg|%>
+                            <center> 
+                                <div class='flash-message alert alert-<%= name %> flash-message-dashbord' id="flash-message-desktop">
+                                    <center><p class="flash-message-dash" style="position: relative;top: -5px;color: #facdcd;"><%= msg %></p></center>
+                                </div>
+                            </center>
+                        <% end %>
                             <div class="profile">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <%= form_for @user, url: profile_path do |f| %>
@@ -127,5 +134,8 @@
                 $("#phoneerror").fadeOut(4000);
             }
         })
+    </script>
+    <script>
+       $('#flash-message-desktop').fadeOut(3000);
     </script>
 </body>   

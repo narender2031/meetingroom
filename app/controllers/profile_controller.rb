@@ -12,11 +12,24 @@ class ProfileController < ApplicationController
         elsif  user_update_params[:phone].blank?
             redirect_to profile_path
         else
-           if @user.update(user_update_params)
+            if user_update_params[:email] == current_user.email
+                flash[:alert] = "Nothing to update"
                 redirect_to profile_path
-           else
-                redirect_to profile_path
-           end
+            else
+                @user_email = User.find_by(email: user_update_params[:email])
+                if @user_email.blank?
+                    if @user.update(user_update_params)
+                        flash[:success] = "Your account detial has been updated!"
+                        redirect_to profile_path
+                   else
+                        flash[:alert] = "Bummer! This email is taken by another user"
+                        redirect_to profile_path
+                   end
+                else
+                    redirect_to profile_path
+                end
+            end
+           
         end
         
     end
@@ -32,6 +45,7 @@ class ProfileController < ApplicationController
             redirect_to profile_path
         else
             if password_update_params[:new_password] != password_update_params[:confirm_password]
+                redirect_to profile_path
             else
                 if current_user.authenticate(password_update_params[:current_password])
                     current_user.password = password_update_params[:new_password]
