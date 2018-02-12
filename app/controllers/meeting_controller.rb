@@ -26,6 +26,7 @@ class MeetingController < ApplicationController
             @locations = Location.all
             @user_location = Location.find(current_user.location_id);
             @meeting_rooms = MeetingRoom.where(location_id: current_user.location_id)
+         
              
         end
     end
@@ -42,10 +43,7 @@ class MeetingController < ApplicationController
         @bookings.meeting_room_id = booking_params[:meeting_room_id]
         @bookings.meeting_room_booking_code = booking_params[:meeting_room_booking_code]
         @bookings.save
-
-
         redirect_to meeting_path
-
     end
    
 end

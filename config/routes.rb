@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   patch '/profile', to:"profile#updateProfile"
   get '/password', to: "profile#password"
   patch '/password', to: "profile#updatePassword"
+  get '/bookings', to: "bookings#index"
 end

@@ -10,8 +10,8 @@ class LoginController < ApplicationController
             puts user.token
             redirect_to meeting_path 
         else
-            flash.now.alert = "Email or password is invalid"
-            render :index
+            flash[:error]= "Email or password is invalid"
+            redirect_to login_path
             puts "Fail"
         end
        

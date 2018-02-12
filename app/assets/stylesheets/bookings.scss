@@ -1,0 +1,44 @@
+// Place all the styles related to the bookings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+table .heading th{
+    width: 25% !important;
+}
+@media only screen and (max-width: 450px) {
+
+       #table_continer{
+        margin-left: -18px !important;
+       }
+    
+}
+
+#myTable_filter {
+    float: right;
+    padding: 20px;
+
+    input{
+        padding: 5px;
+        border: 1px solid #44a1c2;
+        border-radius: 5px;
+    }
+}
+#myTable_length{
+    float: left !important;
+    padding: 20px !important;
+    select{
+        border: 1px solid #44a1c2 !important;
+        height: 32px !important;
+        color: #44a1c2 !important;
+    }
+}
+#myTable_paginate{
+    margin-top: -17px;
+    float: right;
+    span{
+        padding: 5px;
+    }
+    .paginate_button{
+        padding: 5px;
+        text-decoration: inherit;
+    }
+}

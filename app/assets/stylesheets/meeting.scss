@@ -165,6 +165,7 @@ a:hover{
 .menu-coloum{
     color: white;
     margin-left: 10px;
+    text-decoration: inherit !important;
 }
 .menu{
     margin-top: 50px;
@@ -258,6 +259,16 @@ color: #444;
 .current-user-name:hover{
     color: #444 !important;
 }
+div#pop-up {
+    display: none;
+    position: absolute;
+    width: 280px;
+    padding: 10px;
+    background: #eeeeee;
+    color: #000000;
+    border: 1px solid #1a1a1a;
+    font-size: 90%;
+  }
 @media only screen and (max-width: 360px) {
 
     .left-col {

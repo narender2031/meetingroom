@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-1">
         </div>
-            <div class="col-md-8 col-sm-8 col-xs-10" id="login-box" style="    margin-top: 10% !important;border-radius: 4px !important;padding: 20px !important; background: #fff;">
+            <div class="col-md-8 col-sm-8 col-xs-10" id="login-box" >
                 <div class="row">
                     <div class="col-md-6  login-card-image">
                         <center style="margin-top: 50px;">
@@ -14,6 +14,13 @@
                         </center>    
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12 login-details" style="padding: 50px;">
+                        <% flash.each do |name, msg|%>
+                            <center> 
+                                <div class='flash-message alert alert-<%= name %> flash-message-dashbord' id="flash-message-desktop">
+                                    <center><p class="flash-message-dash" style="position: relative;top: -5px;color: #facdcd;"><%= msg %></p></center>
+                                </div>
+                            </center>
+                        <% end %>
                         <center>
                             <div class="row">
                                 <h4><strong>Memeber Login</strong></h4>
@@ -22,10 +29,10 @@
                                 <%= form_tag login_path do %>
                                     <fieldset>
                                         <div class="row">
-                                            <%= text_field_tag :email, params[:email], placeholder:"Email", :autocompelete => :off, class:"input-fields-login", style:"font-family: Poppins-Medium;font-size: 15px;border: 1px solid #e6e6e6;color: #666666;border-radius: 25px;display: block; margin-top: 20px;padding: 0 30px 0 68px;height: 50px;background: #e6e6e6;"%>
+                                            <%= text_field_tag :email, params[:email], placeholder:"Email", :autocompelete => :off, class:"input-fields-login"%>
                                         </div>
                                         <div class="row">
-                                            <%= password_field_tag :password, params[:password], placeholder: "Password", class:"input-fields-login", style:"font-family: Poppins-Medium;font-size: 15px;border: 1px solid #e6e6e6;color: #666666;border-radius: 25px;display: block; margin-top: 20px;padding: 0 30px 0 68px;height: 50px;background: #e6e6e6;"%>
+                                            <%= password_field_tag :password, params[:password], placeholder: "Password", class:"input-fields-login"%>
                                         </div>
                                         <div class="row"> 
                                             <%= submit_tag "Log In", class:"login-button"%>
@@ -42,4 +49,7 @@
         </div>
     </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+        $('#flash-message-desktop').fadeOut(3000);
+    </script>
 </body>    
