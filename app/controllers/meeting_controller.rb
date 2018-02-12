@@ -33,7 +33,6 @@ class MeetingController < ApplicationController
 
     def create
         @bookings = Booking.new
-        puts booking_params[:booking_date].to_date
         @bookings.user_id = booking_params[:user_id]
         @bookings.booking_date = booking_params[:booking_date].to_date
         @bookings.booking_start_time = booking_params[:booking_start_time]
