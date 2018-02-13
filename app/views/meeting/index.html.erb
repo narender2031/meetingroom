@@ -67,6 +67,7 @@
                                                     $('#datetimepicker1').datetimepicker({
                                                         inline: true,
                                                         defaultDate: "<%= @time_req%>",
+                                                        format: 'mm/dd/yyyy',
                                                         maxDate: date,
                                                     }).on('dp.change',function(e){
                                                         console.log(e.date._d)
@@ -1399,9 +1400,8 @@
     <script>
         <% @meeting_booked.each do |meeting| %>
             //console.log($('[id="<%= meeting.meeting_room_id %>"]'));
-            <% puts  @user.meeting.to_date%>
-            <% puts  meeting.booking_date.to_date%>
-            <% if @user.meeting.day == meeting.booking_date.month %>
+            
+            <% if @user.meeting.to_date.day == meeting.booking_date.to_date.day %>
                 if(<%= meeting.booking_start_time%> == 9.0){
                     $(".<%= meeting.meeting_room_id%> .nine").addClass('disable_table');
                     if(<%= meeting.duration %> == 1.0){
@@ -2014,7 +2014,7 @@
                         $(".<%= meeting.meeting_room_id%> .five_thirty").addClass("disable_table");                                             
                     }
                 }
-                else if(<%= meeting.booking_start_time%> == 12.30){
+                else if(<%= meeting.booking_start_time %> == 12.30){
                     $(".<%= meeting.meeting_room_id%> .twelve_thirty").addClass("disable_table"); 
                     if(<%= meeting.duration %> == 1.0){ 
                         $(".<%= meeting.meeting_room_id%> .one").addClass("disable_table"); 
