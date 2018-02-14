@@ -5,9 +5,9 @@ class BookingsController < ApplicationController
         if @user.location_id == nil
             @user.location_id = Location.last.id
             @user.save
-            @bookings = Booking.where(location_id: @user.location_id);
+            @bookings = Booking.where(user_id: @user.id);
         else
-            @bookings = Booking.where(location_id: @user.location_id);
+            @bookings = Booking.where(user_id: @user.id);
         end
 
     end

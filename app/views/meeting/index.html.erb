@@ -10,7 +10,7 @@
                     <div class="row navi-bar">
                         <div class="bar">
                             <div class="row menu-nav-bar" >
-                                <div class="col-md-6 col-sm-6 col-xs-12 brand-logo">
+                                <div class="col-md-4 col-sm-4 col-xs-12 brand-logo">
                                     <% if @locations.blank? %>
                                     <% else %>
                                         <div class="dropdown" style="">
@@ -31,7 +31,21 @@
                                         </div>    
                                     <% end %>    
                                 </div>
-                                <div class="col-md-6 col-sm-6 col-xs-6 user-name">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <% if @meeting_rooms.blank? %>
+                                    <% else %>
+                                        <ul>
+                                            <% @meeting_rooms.each do |meeting_room| %>
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <li class="meeting_id" id="dropdownlocation" data ="<%= meeting_room.id %>">
+                                                        <button class="locations_name meetingId_user" style="margin-left: -100px; margin-right: -100px"> <%= meeting_room.name %></button>
+                                                    </li>
+                                                </div>
+                                            <% end %>    
+                                        </ul>
+                                    <% end %> 
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4 user-name">
                                     <span class="current-user-name">
                                         <i class="fas fa-user icon-user"></i>
                                         <%= link_to profile_path, class:"current-user-name" do %>
@@ -135,7 +149,7 @@
                                 </div>
                             </div>-->
                             <div class="row"  style="margin-top:25px !important;">
-                                <% @meeting_rooms.each do |meeting_room| %>
+                                <% @current_meeting_room.each do |meeting_room| %>
                                     <h4><strong><%= meeting_room.name %></strong></h4>
                                     <div class="meeting-room-booking" id="">
                                         <div class="col-sm-1 col-xs-1 time-border <%= meeting_room.id %>">
@@ -343,6 +357,38 @@
             });
                                                     
         })
+    </script>
+    <script>
+        $(".meeting_id").click(function(){
+            var meeting_id = $(this).attr('data')
+            var data =  {
+                meeting_room_id: meeting_id
+            }
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "http://localhost:3000/opi/meeting_id",
+                "method": "POST",
+                "headers": {
+                  "authorization": "Token <%= @user.token%>",
+                  "content-type": "application/json",
+                  "cache-control": "no-cache",
+                  "postman-token": "093a2052-57f7-02fc-04e5-493fc99c8077"
+                },
+                "processData": false,
+                "data": JSON.stringify(data)
+              }
+              
+              $.ajax(settings).done(function (response) {
+               
+                if(response.message == "Success"){
+                    window.location.reload();
+                }
+              });
+            })
+    </script>
+    <script>
+          
     </script>
     <script>
        $('.time-slots').on('click', function(e){

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :opi do
     post '/auth', to: 'auth#index'
     post '/location_id', to: 'auth#meeting_location'
+    post '/meeting_id', to: "auth#meeting_room" 
   end
 
 

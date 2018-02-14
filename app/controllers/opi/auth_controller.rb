@@ -29,4 +29,16 @@ class Opi::AuthController < Opi::OpiController
            render json: {"Success": "Hello"}
         end
     end
+
+    def meeting_room
+        meeting_room_id = params[:meeting_room_id]
+        puts meeting_room_id
+        if meeting_room_id.blank?
+        else
+            current_user.current_meeting_room = meeting_room_id
+            current_user.save
+            render json: {"message": "Success"}
+        end
+       
+    end
 end

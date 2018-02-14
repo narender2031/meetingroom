@@ -139,7 +139,9 @@ margin-top: 10px;
     .submit_booking{
         width: 100% !important;
     }
-    
+    .location-button{
+        margin-top: -17px;
+    }
 }
 // .menu-coloum{
 //         text-shadow: rgba(0,0,0,0.25) 0 -1px 0;
@@ -312,3 +314,28 @@ div#pop-up {
             padding: 7px !important;
         }
     }
+.accordion-toggle {
+    display: none;
+    .table-condensed{
+        display: none;
+    }
+}   
+.meeting_id {
+.locations_name{
+    float: left;
+    border: 1px solid #444;
+    padding: 7px;
+    border-radius: 8px;
+    list-style-type: none;
+    text-decoration: initial;
+}
+}
+.meeting_id{
+    list-style-type: none;
+}
+.meetingId_user{
+    height: 45px;
+    margin-top: 12px;
+    margin-left: -58px;
+    height: 35px;
+}

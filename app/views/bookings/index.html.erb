@@ -33,6 +33,12 @@
                                         <th class="sorting" tabindex="0" aria-controls="datatable-checkbox" rowspan="1" colspan="1" aria-label="Location: active to sort column ascending" >
                                             seats
                                         </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable-checkbox" rowspan="1" colspan="1" aria-label="Location: active to sort column ascending" >
+                                            Meeting Room
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable-checkbox" rowspan="1" colspan="1" aria-label="Location: active to sort column ascending" >
+                                            Location
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,6 +48,10 @@
                                             <td class="location-table-data" id="name"><%= booking.booking_start_time %></td>
                                             <td class="location-table-data"><%= booking.duration %></td>
                                             <td class="location-table-data"><%= booking.seats %></td>
+                                            <% @meet_room = MeetingRoom.find(booking.meeting_room_id)%>
+                                            <td class="location-table-data"><%= @meet_room.name %>
+                                            <% @loaction_name = Location.find(booking.location_id) %>
+                                            <td class="location-table-data"><%= @loaction_name.location_name %>
                                         </tr>
                                     <% end %>
                                 </tbody>

@@ -17,6 +17,15 @@ class MeetingController < ApplicationController
         
             @user_location = Location.find(current_user.location_id);
             @meeting_rooms = MeetingRoom.where(location_id: current_user.location_id)
+            if @meeting_rooms.blank?
+            else
+                if current_user.current_meeting_room == nil
+                    current_user.current_meeting_room =  @meeting_rooms[0].id
+                    @current_user.save
+                end
+            end
+            @current_meeting_room = MeetingRoom.where(id: current_user.current_meeting_room);
+            @meeting_room_default = MeetingRoom.find(current_user.current_meeting_room)
             
         else
             @time_req = @user.meeting.to_date
@@ -26,7 +35,19 @@ class MeetingController < ApplicationController
             @locations = Location.all
             @user_location = Location.find(current_user.location_id);
             @meeting_rooms = MeetingRoom.where(location_id: current_user.location_id)
-         
+            if @meeting_rooms.blank?
+            else   
+                @meeting_room_id =  current_user.current_meeting_room
+                @meetId = @meeting_rooms.where(id: @meeting_room_id)
+                 
+                if @meetId.blank?
+                    current_user.current_meeting_room =  @meeting_rooms[0].id
+                    @current_user.save
+                end
+            end
+            @current_meeting_room = MeetingRoom.where(id: current_user.current_meeting_room);
+            @meeting_room_default = MeetingRoom.find(current_user.current_meeting_room)
+           
              
         end
     end
